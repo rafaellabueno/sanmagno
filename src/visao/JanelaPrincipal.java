@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -39,11 +40,16 @@ public class JanelaPrincipal extends JFrame {
 	private JMenuItem mntmFilaPrioridade;
 	private JMenuItem mntmProxAtend;
 	private JMenuItem mntmGerarRelatorio;
+	
+	ImageIcon  imgLogo = new ImageIcon(getClass().getResource("logo.png"));
+	private JLabel lblFotoLogo;
+	private JPanel panel;
 
 	public JanelaPrincipal() {
 		setTitle("Hospital San Magno");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 550, 500);
+		setBounds(100, 100, 540, 600);
+		setResizable(false);
 
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setForeground(new Color(255, 255, 255));
@@ -92,7 +98,7 @@ public class JanelaPrincipal extends JFrame {
 		mnRelatorios.add(mntmGerarRelatorio);
 
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(224, 255, 255));
+		contentPane.setBackground(new Color(102, 205, 170));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new MigLayout("", "[424px]", "[39px][14px][39px][][][]"));
@@ -102,16 +108,25 @@ public class JanelaPrincipal extends JFrame {
 				"Respons\u00E1veis: Guilherme Menezes, Rafaella Bueno e Vit\u00F3ria Teixeira");
 		labelpessoas.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		contentPane.add(labelpessoas, "cell 0 0,grow");
+		
+		panel = new JPanel();
+		panel.setBackground(new Color(102, 205, 170));
+		add(panel, "cell 0 1 0 0,grow");
 				
-		JLabel lblHospitalSanMagno = new JLabel("Hospital San Magno");
-		lblHospitalSanMagno.setHorizontalAlignment(SwingConstants.CENTER);
-		lblHospitalSanMagno.setForeground(new Color(0, 128, 128));
-		lblHospitalSanMagno.setFont(new Font("Goudy Old Style", Font.BOLD, 36));
-		contentPane.add(lblHospitalSanMagno, "cell 0 2,grow");
+		lblFotoLogo = new JLabel(new ImageIcon(TelaConsulta.class.getResource("/visao/logo.png")));				
+		lblFotoLogo.setText("");
+		lblFotoLogo.setSize(20, 20);
+		panel.add(lblFotoLogo, "cell 0 0,alignx center");
 				
-		JLabel lblSlogan = new JLabel("Sua sa\u00FAde em nossas m\u00E3os");
-		lblSlogan.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		contentPane.add(lblSlogan, "cell 1 3,grow");
+		//JLabel lblHospitalSanMagno = new JLabel("Hospital San Magno");
+		//lblHospitalSanMagno.setHorizontalAlignment(SwingConstants.CENTER);
+		//lblHospitalSanMagno.setForeground(new Color(0, 128, 128));
+		//lblHospitalSanMagno.setFont(new Font("Goudy Old Style", Font.BOLD, 36));
+		//contentPane.add(lblHospitalSanMagno, "cell 0 2,grow");
+				
+		//JLabel lblSlogan = new JLabel("Sua sa\u00FAde em nossas m\u00E3os");
+		//lblSlogan.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		//contentPane.add(lblSlogan, "cell 1 3,grow");
 
 		tCad = new TelaCadastro();
 		tConfirma = new TelaConfirmacao();
