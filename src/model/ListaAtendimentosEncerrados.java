@@ -64,11 +64,11 @@ public class ListaAtendimentosEncerrados {
 	}
 	
 	//método para buscar o atendimento e consequentemente o paciente que possui o cpf informado
-	public NoAtendimento buscar(int cpf) {
+	public NoAtendimento buscar(String cpf) {
 		NoAtendimento aux = primeiro;
 		if(! this.estaVazia()) {
 			do {
-				if (aux.getAtendimento().getPac().getCpf() == cpf) {
+				if (aux.getAtendimento().getPac().getCpf().equals(cpf)) {
 					return aux;
 				}
 				aux = aux.getProximo();

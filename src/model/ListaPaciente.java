@@ -67,7 +67,7 @@ public class ListaPaciente {
 	}
 	
 	//método para gerar a senha do paciente para ser chamado para a triagem
-	public int gerarSenha(int cpf) {
+	public int gerarSenha(String cpf) {
 		No p = buscar(cpf);
 		int data = 21/12/2000;
 		int hora = 2;
@@ -79,11 +79,11 @@ public class ListaPaciente {
 	}
 	
 	//método para buscar o paciente que possui o cpf informado
-	public No buscar(int cpf) {
+	public No buscar(String cpf) {
 		No aux = primeiro;
 		if(! this.estaVazia()) {
 			do {
-				if (aux.getPaciente().getCpf() == cpf) {
+				if (aux.getPaciente().getCpf().equals(cpf)) {
 					return aux;
 				}
 				aux = aux.getProximo();

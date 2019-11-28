@@ -21,22 +21,22 @@ public class PainelDeSenhas extends JPanel {
 	private JLabel lblAviso;
 	private JButton btnTriagem; 
 	private JPanel panel;
-	private JPanel panel_1;
 	private JPanel panel_2;
 	private JLabel label;
 	ImageIcon  imagem = new ImageIcon(getClass().getResource("senha.png"));
 	private JPanel panel_3;
+	private JLabel lblNewLabel;
 
 	/**
 	 * Create the panel.
 	 */
 	public PainelDeSenhas() {
 		setBackground(new Color(255, 255, 255));
-		setLayout(new MigLayout("", "[217px,grow][38px][1px][36px][1px][24px][1px][1px][81px]", "[31px,grow][][][grow][grow][][][][][]"));
+		setLayout(new MigLayout("", "[97px][56px][283px][][][500px]", "[127px][][140px][][228px]"));
 		
 		panel = new JPanel();
 		panel.setBackground(new Color(102, 205, 170));
-		add(panel, "cell 0 0 9 1,grow");
+		add(panel, "cell 0 0 10 1,grow");
 		
 		panel_3 = new JPanel();
 		panel_3.setBackground(new Color(102, 205, 170));
@@ -52,47 +52,55 @@ public class PainelDeSenhas extends JPanel {
 		label.setBackground(new Color(102, 205, 170));
 		panel_3.add(label, "cell 0 0,alignx center");
 		label.setHorizontalAlignment(SwingConstants.TRAILING);
-		
-		panel_1 = new JPanel();
-		panel_1.setBackground(new Color(255, 255, 255));
-		add(panel_1, "cell 0 3 9 1,alignx center,growy");
-		panel_1.setLayout(new MigLayout("", "[][][]", "[][][][][][][]"));
-		
-		JLabel lblSenha = new JLabel("Senha");
-		panel_1.add(lblSenha, "flowy,cell 0 0 3 1,grow");
-		lblSenha.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		
-		JLabel lblNome = new JLabel("Nome");
-		panel_1.add(lblNome, "cell 1 2");
-		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		
-		JLabel lblCpf = new JLabel("CPF");
-		panel_1.add(lblCpf, "flowx,cell 0 4 3 1");
-		lblCpf.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		
-		lblCpfPainel = new JLabel("");
-		panel_1.add(lblCpfPainel, "cell 0 4 3 1");
-		lblCpfPainel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		
-		lblAviso = new JLabel("");
-		panel_1.add(lblAviso, "cell 0 5 3 1");
-		lblAviso.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		
-		lblSenhaPainel = new JLabel("");
-		panel_1.add(lblSenhaPainel, "cell 2 0");
-		lblSenhaPainel.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		
-		lblNomePainel = new JLabel("");
-		panel_1.add(lblNomePainel, "flowx,cell 2 2");
-		lblNomePainel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+	    
+	    lblNewLabel = new JLabel("");
+	    add(lblNewLabel, "cell 4 1");
+	    
+	    lblAviso = new JLabel("");
+	    lblAviso.setHorizontalAlignment(SwingConstants.CENTER);
+	    add(lblAviso, "cell 0 3 6 1,alignx center,aligny center");
+	    lblAviso.setForeground(new Color(0, 0, 0));
+	    lblAviso.setFont(new Font("Tahoma", Font.BOLD, 14));
 	    
 	    panel_2 = new JPanel();
 	    panel_2.setBackground(new Color(102, 205, 170));
-	    add(panel_2, "cell 0 4 9 1,grow");
+	    add(panel_2, "cell 0 4 6 1,grow");
 	    
 	    btnTriagem = new JButton("Triagem");
 	    panel_2.add(btnTriagem);
 	    btnTriagem.setFont(new Font("Tahoma", Font.PLAIN, 14));
+	    
+	    JPanel panel_1 = new JPanel();
+	    panel_1.setBackground(Color.WHITE);
+	    add(panel_1, "cell 0 2 6 1,alignx center,growy");
+	    panel_1.setLayout(new MigLayout("", "[][]", "[][][][][][]"));
+	    
+	    JLabel lblSenha = new JLabel("Senha");
+	    panel_1.add(lblSenha, "flowx,cell 0 0");
+	    lblSenha.setFont(new Font("Tahoma", Font.PLAIN, 14));
+	    
+	    lblSenhaPainel = new JLabel("");
+	    lblSenhaPainel.setBackground(new Color(102, 205, 170));
+	    panel_1.add(lblSenhaPainel, "cell 1 0");
+	    lblSenhaPainel.setFont(new Font("Tahoma", Font.BOLD, 40));
+	    
+	    JLabel lblNome = new JLabel("Nome");
+	    panel_1.add(lblNome, "cell 0 2");
+	    lblNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
+	    
+	    lblNomePainel = new JLabel("");
+	    lblNomePainel.setForeground(new Color(102, 205, 170));
+	    panel_1.add(lblNomePainel, "cell 1 2");
+	    lblNomePainel.setFont(new Font("Tahoma", Font.BOLD, 14));
+	    
+	    JLabel lblCpf = new JLabel("CPF");
+	    panel_1.add(lblCpf, "cell 0 3");
+	    lblCpf.setFont(new Font("Tahoma", Font.PLAIN, 14));
+	    
+	    lblCpfPainel = new JLabel("");
+	    lblCpfPainel.setForeground(new Color(102, 205, 170));
+	    panel_1.add(lblCpfPainel, "cell 1 3");
+	    lblCpfPainel.setFont(new Font("Tahoma", Font.BOLD, 14));
 
 	}
 

@@ -3,11 +3,11 @@ package model;
 public class Paciente {
 	//atributos da classe
 	private String nome;
-	private int cpf;
+	private String cpf;
 	private int datanasc;
 	
 	//construtor da classe
-	public Paciente(String nome, int cpf, int datanasc) {
+	public Paciente(String nome, String cpf, int datanasc) {
 		super();
 		this.nome = nome;
 		this.cpf = cpf;
@@ -28,11 +28,11 @@ public class Paciente {
 		this.nome = nome;
 	}
 	
-	public int getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 	
-	public void setCpf(int cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 	

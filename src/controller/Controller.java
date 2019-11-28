@@ -74,6 +74,11 @@ public class Controller implements ActionListener {
 			this.jan.setContentPane(this.jan.getTcad());
 			this.jan.revalidate();
 			this.jan.repaint();
+			this.jan.getTcad().getTextNome().setText("");
+			this.jan.getTcad().getTextCPF().setText("");
+			this.jan.getTcad().getTextData().setText("");
+			this.jan.getTcad().getLblAviso().setText("");
+
 		}
 
 		if (arg0.getActionCommand().equals("Limpar")) {
@@ -103,28 +108,25 @@ public class Controller implements ActionListener {
 			this.jan.getTatendenc().getTextHorasS().setText("");
 			this.jan.getTcon().getLblSenha().setText("");
 			this.jan.getTcon().getLblPaciente().setText("");
-			
 
 		}
 		if (arg0.getActionCommand().equals("Cadastrar")) {
 			try {
 				String nomeAux = this.jan.getTcad().getTextNome().getText();
-				if(nomeAux.equals("") || this.jan.getTcad().getTextCPF().getText().equals("") || 
-						this.jan.getTcad().getTextData().getText().equals(""))
-				{
+				if (nomeAux.equals("") || this.jan.getTcad().getTextCPF().getText().equals("")
+						|| this.jan.getTcad().getTextData().getText().equals("")) {
 					this.jan.getTcad().getLblAviso().setText("Todos os campos devem ser preenchidos");
-				}
-				else {
-					int cPFAux = Integer.parseInt(this.jan.getTcad().getTextCPF().getText());
+				} else {
+					String cPFAux = (this.jan.getTcad().getTextCPF().getText());
 					int dataAux = Integer.parseInt(this.jan.getTcad().getTextData().getText());
-					
+
 					Paciente pac = new Paciente(nomeAux, cPFAux, dataAux);
 					listaPac.adicionar(pac);
 					this.jan.setContentPane(this.jan.getTconfirma());
 					this.jan.revalidate();
 					this.jan.repaint();
 				}
-			}catch(NumberFormatException  e) {
+			} catch (NumberFormatException e) {
 				this.jan.getTcad().getLblAviso().setText("Campos com valores inadequados");
 			}
 		}
@@ -137,7 +139,7 @@ public class Controller implements ActionListener {
 
 		if (arg0.getActionCommand().equals("Pesquisar")) {
 			try {
-				int cpf = Integer.parseInt(this.jan.getTcon().getTextCPF().getText());
+				String cpf = (this.jan.getTcon().getTextCPF().getText());
 				pLista = listaPac.buscar(cpf).getPaciente();
 				this.jan.getTcon().getLblPaciente().setText(pLista.getNome());
 				this.jan.getTcon().botaoSenha();
@@ -151,6 +153,10 @@ public class Controller implements ActionListener {
 			this.jan.setContentPane(this.jan.getTcon());
 			this.jan.revalidate();
 			this.jan.repaint();
+			this.jan.getTcon().getTextCPF().setText("");
+			this.jan.getTcon().getLblPaciente().setText("");
+			this.jan.getTcon().getLblSenha().setText("");
+			
 		}
 
 		if (arg0.getActionCommand().equals("Gerar Senha")) {
@@ -166,8 +172,8 @@ public class Controller implements ActionListener {
 				proxAtendimento = listaPac.getFilaA().desempilhar().getAtendimento();
 				this.jan.getTsenha().getLblSenhaPainel().setText(String.valueOf(proxAtendimento.getSenha()));
 				this.jan.getTsenha().getLblNomePainel().setText(String.valueOf(proxAtendimento.getPac().getNome()));
-				this.jan.getTsenha().getLblCpfPainel().setText(String.valueOf(proxAtendimento.getPac().getCpf()));
-			}catch(Exception e) {
+				this.jan.getTsenha().getLblCpfPainel().setText(proxAtendimento.getPac().getCpf());
+			} catch (Exception e) {
 				this.jan.getTsenha().getLblAviso().setText("Não há pacientes para atendimento");
 			}
 		}
@@ -310,19 +316,22 @@ public class Controller implements ActionListener {
 					listaAtenEnc.adicionar(ateEnc.getAtendimento());
 				} else {
 					if (filaP3.estaVazia() == false) {
-						this.jan.getTproxpac().getLblNomeProx().setText(filaP3.topo().getAtendimento().getPac().getNome());
+						this.jan.getTproxpac().getLblNomeProx()
+								.setText(filaP3.topo().getAtendimento().getPac().getNome());
 						this.jan.getTproxpac().getLblPrioridadeProx().setText(String.valueOf(3));
 						NoFila ateEnc = filaP3.desempilhar();
 						listaAtenEnc.adicionar(ateEnc.getAtendimento());
 					} else {
 						if (filaP4.estaVazia() == false) {
-							this.jan.getTproxpac().getLblNomeProx().setText(filaP4.topo().getAtendimento().getPac().getNome());
+							this.jan.getTproxpac().getLblNomeProx()
+									.setText(filaP4.topo().getAtendimento().getPac().getNome());
 							this.jan.getTproxpac().getLblPrioridadeProx().setText(String.valueOf(4));
 							NoFila ateEnc = filaP4.desempilhar();
 							listaAtenEnc.adicionar(ateEnc.getAtendimento());
 						} else {
 							if (filaP5.estaVazia() == false) {
-								this.jan.getTproxpac().getLblNomeProx().setText(filaP5.topo().getAtendimento().getPac().getNome());
+								this.jan.getTproxpac().getLblNomeProx()
+										.setText(filaP5.topo().getAtendimento().getPac().getNome());
 								this.jan.getTproxpac().getLblPrioridadeProx().setText(String.valueOf(5));
 								NoFila ateEnc = filaP5.desempilhar();
 								listaAtenEnc.adicionar(ateEnc.getAtendimento());
@@ -338,10 +347,10 @@ public class Controller implements ActionListener {
 			this.jan.revalidate();
 			this.jan.repaint();
 		}
-		
+
 		if (arg0.getActionCommand().equals("Pesquisar CPF")) {
 			try {
-				int cpf = Integer.parseInt(this.jan.getTatendenc().getTextCpf().getText());
+				String cpf = (this.jan.getTatendenc().getTextCpf().getText());
 				pLista = listaAtenEnc.buscar(cpf).getAtendimento().getPac();
 				this.jan.getTatendenc().getLblNome().setText(pLista.getNome());
 				this.jan.getTatendenc().tornarBotaoVisivel();
@@ -350,14 +359,14 @@ public class Controller implements ActionListener {
 				this.jan.getTatendenc().tornarBotaoInvisivel();
 			}
 		}
-		
+
 		if (arg0.getActionCommand().equals("Atualizar")) {
 			try {
-				int cpf = Integer.parseInt(this.jan.getTatendenc().getTextCpf().getText());
+				String cpf = (this.jan.getTatendenc().getTextCpf().getText());
 				Atendimento atAtual = listaAtenEnc.buscar(cpf).getAtendimento();
 				atAtual.setDataS(Integer.parseInt(this.jan.getTatendenc().getTextDataS().getText()));
 				atAtual.setHoraS(Integer.parseInt(this.jan.getTatendenc().getTextHorasS().getText()));
-			}catch(Exception e) {
+			} catch (Exception e) {
 				this.jan.getTatendenc().getLblAviso().setText("Campos com valores inadequados");
 			}
 		}
