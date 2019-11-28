@@ -117,16 +117,7 @@ public class JanelaPrincipal extends JFrame {
 		lblFotoLogo.setText("");
 		lblFotoLogo.setSize(20, 20);
 		panel.add(lblFotoLogo, "cell 0 0,alignx center");
-				
-		//JLabel lblHospitalSanMagno = new JLabel("Hospital San Magno");
-		//lblHospitalSanMagno.setHorizontalAlignment(SwingConstants.CENTER);
-		//lblHospitalSanMagno.setForeground(new Color(0, 128, 128));
-		//lblHospitalSanMagno.setFont(new Font("Goudy Old Style", Font.BOLD, 36));
-		//contentPane.add(lblHospitalSanMagno, "cell 0 2,grow");
-				
-		//JLabel lblSlogan = new JLabel("Sua sa\u00FAde em nossas m\u00E3os");
-		//lblSlogan.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		//contentPane.add(lblSlogan, "cell 1 3,grow");
+	
 
 		tCad = new TelaCadastro();
 		tConfirma = new TelaConfirmacao();

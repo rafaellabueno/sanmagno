@@ -101,6 +101,8 @@ public class Controller implements ActionListener {
 			this.jan.getTatendenc().getTextCpf().setText("");
 			this.jan.getTatendenc().getTextDataS().setText("");
 			this.jan.getTatendenc().getTextHorasS().setText("");
+			this.jan.getTcon().getLblSenha().setText("");
+			this.jan.getTcon().getLblPaciente().setText("");
 			
 
 		}
