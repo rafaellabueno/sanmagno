@@ -1,10 +1,12 @@
 package model;
 
 public class Paciente {
+	//atributos da classe
 	private String nome;
 	private int cpf;
 	private int datanasc;
 	
+	//construtor da classe
 	public Paciente(String nome, int cpf, int datanasc) {
 		super();
 		this.nome = nome;
@@ -12,10 +14,12 @@ public class Paciente {
 		this.datanasc = datanasc;
 	}
 	
+	//construtor da classe vazio
 	public Paciente() {
 		
 	}
 	
+	//getters e setters da classe
 	public String getNome() {
 		return nome;
 	}

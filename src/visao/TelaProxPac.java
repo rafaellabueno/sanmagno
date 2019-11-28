@@ -8,6 +8,8 @@ import java.awt.Color;
 import javax.swing.JButton;
 
 public class TelaProxPac extends JPanel {
+	
+	//Declaração dos componentes da tela
 	private JLabel lblNomeProx;
 	private JLabel lblPrioridadeProx;
 	private JButton btnVoltar; 
@@ -45,6 +47,7 @@ public class TelaProxPac extends JPanel {
 
 	}
 
+	//getters e setters dos componentes da tela
 	public JLabel getLblNomeProx() {
 		return lblNomeProx;
 	}

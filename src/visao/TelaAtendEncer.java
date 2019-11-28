@@ -9,6 +9,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class TelaAtendEncer extends JPanel {
+	
+	//Declaração dos componentes da tela
 	private JTextField textCpf;
 	private JTextField textHorasS;
 	private JTextField textDataS;
@@ -17,6 +19,7 @@ public class TelaAtendEncer extends JPanel {
 	private JLabel lblNome;
 	private JButton btnLimpar;
 	private JButton btnVoltar;
+	private JLabel lblAviso;
 
 	/**
 	 * Create the panel.
@@ -61,11 +64,16 @@ public class TelaAtendEncer extends JPanel {
 		add(textDataS, "cell 0 5");
 		textDataS.setColumns(10);
 		
+		lblAviso = new JLabel("");
+		lblAviso.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		add(lblAviso, "cell 0 7");
+		
 		btnLimpar = new JButton("Limpar");
 		btnLimpar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		add(btnLimpar, "flowx,cell 0 8");
 
 		btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.setEnabled(false);
 		btnAtualizar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		add(btnAtualizar, "cell 0 8,alignx center");
 		
@@ -75,6 +83,7 @@ public class TelaAtendEncer extends JPanel {
 
 	}
 
+	//getters e setters dos componentes da tela
 	public JButton getBtnPesquisarCpf() {
 		return btnPesquisarCpf;
 	}
@@ -139,5 +148,21 @@ public class TelaAtendEncer extends JPanel {
 		this.btnVoltar = btnVoltar;
 	}
 
+	public JLabel getLblAviso() {
+		return lblAviso;
+	}
+
+	public void setLblAviso(JLabel lblAviso) {
+		this.lblAviso = lblAviso;
+	}
 	
+	//torna o botão de atualizar visivel ao encontrar paciente com cpf informado
+	public void tornarBotaoVisivel() {
+		btnAtualizar.setEnabled(true);
+	}
+	
+	//torna o botão de atualizar invisivel quando não encontrar paciente com cpf informado
+	public void tornarBotaoInvisivel() {
+		btnAtualizar.setEnabled(false);
+	}
 }

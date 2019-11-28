@@ -1,10 +1,12 @@
 package model;
 
 public class Atendimento {
+	//atributos da classe
 	private int senha;
 	private Paciente pac;
 	private int dataC, horaC, dataS, horaS;
 	
+	//construtor
 	public Atendimento(Paciente pac, int dataC, int horaC, int senha) {
 		super();
 		this.senha = senha;
@@ -15,6 +17,7 @@ public class Atendimento {
 		this.horaS = 0;
 	}
 
+	//getters e setters dos atributos
 	public int getSenha() {
 		return senha;
 	}

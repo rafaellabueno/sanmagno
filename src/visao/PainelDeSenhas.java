@@ -10,9 +10,11 @@ import javax.swing.JButton;
 
 public class PainelDeSenhas extends JPanel {
 	
+	//Declaração dos componentes da tela
 	private JLabel lblSenhaPainel;
 	private JLabel lblNomePainel; 
 	private JLabel lblCpfPainel;  
+	private JLabel lblAviso;
 	private JButton btnTriagem; 
 
 	/**
@@ -49,6 +51,10 @@ public class PainelDeSenhas extends JPanel {
 		lblCpfPainel = new JLabel("");
 		lblCpfPainel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		add(lblCpfPainel, "cell 0 4");
+	    
+	    lblAviso = new JLabel("");
+	    lblAviso.setFont(new Font("Tahoma", Font.PLAIN, 14));
+	    add(lblAviso, "cell 0 6");
 		
 	    btnTriagem = new JButton("Triagem");
 		btnTriagem.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -56,6 +62,7 @@ public class PainelDeSenhas extends JPanel {
 
 	}
 
+	//getters e setters dos componentes da tela
 	public JLabel getLblSenhaPainel() {
 		return lblSenhaPainel;
 	}
@@ -88,6 +95,11 @@ public class PainelDeSenhas extends JPanel {
 		this.btnTriagem = btnTriagem;
 	}
 
-	
-	
+	public JLabel getLblAviso() {
+		return lblAviso;
+	}
+
+	public void setLblAviso(JLabel lblAviso) {
+		this.lblAviso = lblAviso;
+	}	
 }

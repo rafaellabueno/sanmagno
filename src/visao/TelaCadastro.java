@@ -9,11 +9,14 @@ import javax.swing.JButton;
 import java.awt.Color;
 
 public class TelaCadastro extends JPanel {
+	
+	//Declaração dos componentes da tela
 	private JTextField textNome;
 	private JTextField textCPF;
 	private JTextField textData;
 	private JButton btnLimpar;
 	private JButton btnCadastrar;
+	private JLabel lblAviso;
 	
 
 	/**
@@ -35,14 +38,20 @@ public class TelaCadastro extends JPanel {
 		lblDataNas.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		add(lblDataNas, "flowx,cell 0 4 2 1");
 		
+		lblAviso = new JLabel("");
+		lblAviso.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		add(lblAviso, "cell 0 5");
+		
 		btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		add(btnCadastrar, "flowx,cell 0 6");
 		
 		btnLimpar = new JButton("Limpar");
+		btnLimpar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		add(btnLimpar, "cell 0 6");
 		
 		textNome = new JTextField();
-		add(textNome, "cell 0 2 4 1,alignx left,grow");
+		add(textNome, "cell 0 2 2 1,alignx left,grow");
 		textNome.setColumns(10);
 		
 		JLabel lblCPF = new JLabel("CPF:");
@@ -54,12 +63,12 @@ public class TelaCadastro extends JPanel {
 		textCPF.setColumns(10);
 		
 		textData = new JTextField();
-		add(textData, "cell 0 4,grow");
+		add(textData, "cell 0 4 2 1,grow");
 		textData.setColumns(10);
 
 	}
 
-
+	//getters e setters dos componentes da tela
 	public JTextField getTextNome() {
 		return textNome;
 	}
@@ -108,7 +117,13 @@ public class TelaCadastro extends JPanel {
 	public void setBtnCadastrar(JButton btnCadastrar) {
 		this.btnCadastrar = btnCadastrar;
 	}
-	
-	
 
+	public JLabel getLblAviso() {
+		return lblAviso;
+	}
+
+
+	public void setLblAviso(JLabel lblAviso) {
+		this.lblAviso = lblAviso;
+	}
 }

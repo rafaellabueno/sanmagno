@@ -1,11 +1,11 @@
 package model;
 
-public class FilaAtendimento {
+public class FilaPrioridade {
 	//atributo da classe
 	private NoFila topo;
 	
 	//construtor da classe
-	public FilaAtendimento() {
+	public FilaPrioridade() {
 		this.topo = null;
 	}
 	

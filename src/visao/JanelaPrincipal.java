@@ -21,22 +21,24 @@ public class JanelaPrincipal extends JFrame {
 	/**
 	 * 
 	 */
+	//Declaração de telas e componentes da tela
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private TelaCadastro tcad;
-	private TelaConfirmacao tconfirma;
-	private TelaConsulta tcon;
-	private TelaFilasDePrioridades tfpri;
-	private PainelDeSenhas tsenha;
-	private TelaTriagem ttriagem;
-	private TelaProxPac tproxpac;
-	private TelaAtendEncer tatendenc; 
+	private TelaCadastro tCad;
+	private TelaConfirmacao tConfirma;
+	private TelaConsulta tCon;
+	private TelaFilasDePrioridades tPri;
+	private PainelDeSenhas tSenha;
+	private TelaTriagem tTriagem;
+	private TelaProxPac tProxPac;
+	private TelaAtendEncer tAtendEnc; 
 	private JMenuItem menuCadastro;
 	private JMenuItem menuConsulta;
 	private JMenuItem mntmPainelDeSenhas;
 	private JMenuItem mntmAtendEnce;
 	private JMenuItem mntmFilaPrioridade;
 	private JMenuItem mntmProxAtend;
+	private JMenuItem mntmGerarRelatorio;
 
 	public JanelaPrincipal() {
 		setTitle("Hospital San Magno");
@@ -81,6 +83,13 @@ public class JanelaPrincipal extends JFrame {
 		mntmProxAtend = new JMenuItem("Próximo Atendimento");
 		mntmProxAtend.setActionCommand("menuProx");
 		mnPrioridade.add(mntmProxAtend);
+		
+		JMenu mnRelatorios = new JMenu("Relatórios");
+		menuBar.add(mnRelatorios);
+
+		mntmGerarRelatorio = new JMenuItem("Gerar Relatórios");
+		mntmGerarRelatorio.setActionCommand("menuRelatorio");
+		mnRelatorios.add(mntmGerarRelatorio);
 
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(224, 255, 255));
@@ -104,30 +113,31 @@ public class JanelaPrincipal extends JFrame {
 		lblSlogan.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		contentPane.add(lblSlogan, "cell 1 3,grow");
 
-		tcad = new TelaCadastro();
-		tconfirma = new TelaConfirmacao();
-		tcon = new TelaConsulta();
-		tsenha = new PainelDeSenhas();
-		ttriagem = new TelaTriagem();
-		tfpri = new TelaFilasDePrioridades();
-		tproxpac = new TelaProxPac();
-        tatendenc = new TelaAtendEncer(); 
+		tCad = new TelaCadastro();
+		tConfirma = new TelaConfirmacao();
+		tCon = new TelaConsulta();
+		tSenha = new PainelDeSenhas();
+		tTriagem = new TelaTriagem();
+		tPri = new TelaFilasDePrioridades();
+		tProxPac = new TelaProxPac();
+        tAtendEnc = new TelaAtendEncer(); 
 	}
 
+	//getters e setters das telas e componentes
 	public TelaCadastro getTcad() {
-		return tcad;
+		return tCad;
 	}
 
-	public void setTcad(TelaCadastro tcad) {
-		this.tcad = tcad;
+	public void setTcad(TelaCadastro tCad) {
+		this.tCad = tCad;
 	}
 
 	public TelaFilasDePrioridades getTfpri() {
-		return tfpri;
+		return tPri;
 	}
 
-	public void setTfpri(TelaFilasDePrioridades tfpri) {
-		this.tfpri = tfpri;
+	public void setTfpri(TelaFilasDePrioridades tPri) {
+		this.tPri = tPri;
 	}
 
 	public JMenuItem getMenuCadastro() {
@@ -147,11 +157,11 @@ public class JanelaPrincipal extends JFrame {
 	}
 
 	public TelaConfirmacao getTconfirma() {
-		return tconfirma;
+		return tConfirma;
 	}
 
-	public void setTconfirma(TelaConfirmacao tconfirma) {
-		this.tconfirma = tconfirma;
+	public void setTconfirma(TelaConfirmacao tConfirma) {
+		this.tConfirma = tConfirma;
 	}
 
 	public JPanel getjPrinc() {
@@ -159,19 +169,19 @@ public class JanelaPrincipal extends JFrame {
 	}
 
 	public TelaConsulta getTcon() {
-		return tcon;
+		return tCon;
 	}
 
-	public void setTcon(TelaConsulta tcon) {
-		this.tcon = tcon;
+	public void setTcon(TelaConsulta tCon) {
+		this.tCon = tCon;
 	}
 
 	public PainelDeSenhas getTsenha() {
-		return tsenha;
+		return tSenha;
 	}
 
-	public void setTsenha(PainelDeSenhas tsenha) {
-		this.tsenha = tsenha;
+	public void setTsenha(PainelDeSenhas tSenha) {
+		this.tSenha = tSenha;
 	}
 
 	public JMenuItem getMntmPainelDeSenhas() {
@@ -183,11 +193,11 @@ public class JanelaPrincipal extends JFrame {
 	}
 
 	public TelaTriagem getTtriagem() {
-		return ttriagem;
+		return tTriagem;
 	}
 
-	public void setTtriagem(TelaTriagem ttriagem) {
-		this.ttriagem = ttriagem;
+	public void setTtriagem(TelaTriagem tTriagem) {
+		this.tTriagem = tTriagem;
 	}
 
 	public JMenuItem getMntmFilaPrioridade() {
@@ -199,11 +209,11 @@ public class JanelaPrincipal extends JFrame {
 	}
 
 	public TelaProxPac getTproxpac() {
-		return tproxpac;
+		return tProxPac;
 	}
 
-	public void setTproxpac(TelaProxPac tproxpac) {
-		this.tproxpac = tproxpac;
+	public void setTproxpac(TelaProxPac tProxPac) {
+		this.tProxPac = tProxPac;
 	}
 
 	public JMenuItem getMntmProxAtend() {
@@ -223,11 +233,11 @@ public class JanelaPrincipal extends JFrame {
 	}
 
 	public TelaAtendEncer getTatendenc() {
-		return tatendenc;
+		return tAtendEnc;
 	}
 
-	public void setTatendenc(TelaAtendEncer tatendenc) {
-		this.tatendenc = tatendenc;
+	public void setTatendenc(TelaAtendEncer tAtendEnc) {
+		this.tAtendEnc = tAtendEnc;
 	}
 	
 	

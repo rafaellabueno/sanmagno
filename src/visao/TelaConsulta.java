@@ -10,6 +10,7 @@ import javax.swing.JButton;
 
 public class TelaConsulta extends JPanel {
 
+	//Declaração dos componentes da tela
 	private JTextField textCPF;
 	private JButton btnPesquisar;
 	private JButton btnGerarSenha;
@@ -65,6 +66,7 @@ public class TelaConsulta extends JPanel {
 
 	}
 
+	//getters e setters dos componentes da tela
 	public JTextField getTextCPF() {
 		return textCPF;
 	}
@@ -105,14 +107,6 @@ public class TelaConsulta extends JPanel {
 		this.lblSenha = lblSenha;
 	}
 
-	public void botaoSenha() {
-		btnGerarSenha.setEnabled(true);
-	}
-
-	public void botaoSenhaDesabilitar() {
-		btnGerarSenha.setEnabled(false);
-	}
-
 	public JButton getBtnVoltar() {
 		return btnVoltar;
 	}
@@ -127,6 +121,16 @@ public class TelaConsulta extends JPanel {
 
 	public void setBtnLimpar(JButton btnLimpar) {
 		this.btnLimpar = btnLimpar;
+	}
+	
+	//botao da senha só é liberado ao encontrar cpf
+	public void botaoSenha() {
+		btnGerarSenha.setEnabled(true);
+	}
+
+	//botao da senhaé ocultado quando não encontrado cpf
+	public void botaoSenhaDesabilitar() {
+		btnGerarSenha.setEnabled(false);
 	}
 
 }

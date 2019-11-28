@@ -10,6 +10,7 @@ import javax.swing.JButton;
 
 public class TelaFilasDePrioridades extends JPanel {
 
+	//Declaração dos componentes da tela
 	private JComboBox<String> comboPrioridade;
 	private JButton btnPesquisarPrioridade;
 	private JLabel lblPacientePrioridade;
@@ -51,7 +52,8 @@ public class TelaFilasDePrioridades extends JPanel {
 		lblPacientePrioridade.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		add(lblPacientePrioridade, "cell 0 5 2 1,growx");
 	}
-
+	
+	//getters e setters dos componentes da tela
 	public JComboBox<String> getComboPrioridade() {
 		return comboPrioridade;
 	}

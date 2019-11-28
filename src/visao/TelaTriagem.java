@@ -11,6 +11,7 @@ import javax.swing.SwingConstants;
 
 public class TelaTriagem extends JPanel {
 
+	//Declaração dos componentes da tela
 	private JCheckBox chckbxEntubado;
 	private JCheckBox chckbxApneia;
 	private JCheckBox chckbxSemPulso;
@@ -20,13 +21,13 @@ public class TelaTriagem extends JPanel {
 	private JCheckBox chckbxSituacaoDeRisco;
 	private JCheckBox chckbxConfusoDesorientado;
 	private JCheckBox chckbxProcedimentos;
-	private JCheckBox chckbxfreqC;
+	private JCheckBox chckbxFreqC;
 	private JCheckBox chckbxFreqR;
-	private JCheckBox chckbxtempC;
-	private JCheckBox chckbxoutrosP;
-	private JCheckBox chckbxtempC2;
-	private JCheckBox chckbxoximetria;
-	private JCheckBox chckbxfluxoResp;
+	private JCheckBox chckbxTempC;
+	private JCheckBox chckbxOutrosP;
+	private JCheckBox chckbxTempC2;
+	private JCheckBox chckbxOximetria;
+	private JCheckBox chckbxFluxoResp;
 	private JButton btnPrioridade;
 	private JLabel lblNomePaciente;
 	private JLabel lblPrioridadeDoPaciente;
@@ -67,24 +68,24 @@ public class TelaTriagem extends JPanel {
 		chckbxProcedimentos.setActionCommand("Procedimentos");
 		add(chckbxProcedimentos, "cell 0 8");
 
-		chckbxfreqC = new JCheckBox("Frequ\u00EAncia Card\u00EDaca > 90");
-		chckbxfreqC.setEnabled(false);
-		chckbxfreqC.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		add(chckbxfreqC, "flowx,cell 0 10");
+		chckbxFreqC = new JCheckBox("Frequ\u00EAncia Card\u00EDaca > 90");
+		chckbxFreqC.setEnabled(false);
+		chckbxFreqC.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		add(chckbxFreqC, "flowx,cell 0 10");
 
 		chckbxFreqR = new JCheckBox("Frequ\u00EAncia Respirat\u00F3rio > 20");
 		chckbxFreqR.setEnabled(false);
 		chckbxFreqR.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		add(chckbxFreqR, "flowx,cell 0 12");
 
-		chckbxtempC = new JCheckBox("Temperatura Corporal < 36 ");
-		chckbxtempC.setEnabled(false);
-		chckbxtempC.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		add(chckbxtempC, "flowx,cell 0 13");
+		chckbxTempC = new JCheckBox("Temperatura Corporal < 36 ");
+		chckbxTempC.setEnabled(false);
+		chckbxTempC.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		add(chckbxTempC, "flowx,cell 0 13");
 
-		chckbxoutrosP = new JCheckBox("Outros procedimentos");
-		chckbxoutrosP.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(chckbxoutrosP, "flowx,cell 0 14");
+		chckbxOutrosP = new JCheckBox("Outros procedimentos");
+		chckbxOutrosP.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		add(chckbxOutrosP, "flowx,cell 0 14");
 
 		chckbxDor = new JCheckBox("Dor/Sofrimento agudo");
 		chckbxDor.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -106,17 +107,17 @@ public class TelaTriagem extends JPanel {
 		chckbxConfusoDesorientado.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		add(chckbxConfusoDesorientado, "cell 0 6");
 
-		chckbxtempC2 = new JCheckBox("Temperatural Corporal >38");
-		chckbxtempC2.setEnabled(false);
-		add(chckbxtempC2, "cell 0 10");
+		chckbxTempC2 = new JCheckBox("Temperatural Corporal >38");
+		chckbxTempC2.setEnabled(false);
+		add(chckbxTempC2, "cell 0 10");
 
-		chckbxoximetria = new JCheckBox("Oximetria do pulso <90%");
-		chckbxoximetria.setEnabled(false);
-		add(chckbxoximetria, "cell 0 12");
+		chckbxOximetria = new JCheckBox("Oximetria do pulso <90%");
+		chckbxOximetria.setEnabled(false);
+		add(chckbxOximetria, "cell 0 12");
 
-		chckbxfluxoResp = new JCheckBox("Fluxo Respirat\u00F3rio < 200");
-		chckbxfluxoResp.setEnabled(false);
-		add(chckbxfluxoResp, "cell 0 13");
+		chckbxFluxoResp = new JCheckBox("Fluxo Respirat\u00F3rio < 200");
+		chckbxFluxoResp.setEnabled(false);
+		add(chckbxFluxoResp, "cell 0 13");
 
 		btnPrioridade = new JButton("Calcular Prioridade");
 		btnPrioridade.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -145,6 +146,8 @@ public class TelaTriagem extends JPanel {
 		
 	}
 
+	
+	//getters e setters dos componentes da tela
 	public JCheckBox getChckbxEntubado() {
 		return chckbxEntubado;
 	}
@@ -218,11 +221,11 @@ public class TelaTriagem extends JPanel {
 	}
 
 	public JCheckBox getChckbxfreqC() {
-		return chckbxfreqC;
+		return chckbxFreqC;
 	}
 
-	public void setChckbxfreqC(JCheckBox chckbxfreqC) {
-		this.chckbxfreqC = chckbxfreqC;
+	public void setChckbxFreqC(JCheckBox chckbxFreqC) {
+		this.chckbxFreqC = chckbxFreqC;
 	}
 
 	public JCheckBox getChckbxFreqR() {
@@ -233,44 +236,44 @@ public class TelaTriagem extends JPanel {
 		this.chckbxFreqR = chckbxFreqR;
 	}
 
-	public JCheckBox getChckbxtempC() {
-		return chckbxtempC;
+	public JCheckBox getChckbxTempC() {
+		return chckbxTempC;
 	}
 
-	public void setChckbxtempC(JCheckBox chckbxtempC) {
-		this.chckbxtempC = chckbxtempC;
+	public void setChckbxtempC(JCheckBox chckbxTempC) {
+		this.chckbxTempC = chckbxTempC;
 	}
 
-	public JCheckBox getChckbxoutrosP() {
-		return chckbxoutrosP;
+	public JCheckBox getChckbxOutrosP() {
+		return chckbxOutrosP;
 	}
 
-	public void setChckbxoutrosP(JCheckBox chckbxoutrosP) {
-		this.chckbxoutrosP = chckbxoutrosP;
+	public void setChckbxoutrosP(JCheckBox chckbxOutrosP) {
+		this.chckbxOutrosP = chckbxOutrosP;
 	}
 
-	public JCheckBox getChckbxtempC2() {
-		return chckbxtempC2;
+	public JCheckBox getChckbxTempC2() {
+		return chckbxTempC2;
 	}
 
-	public void setChckbxtempC2(JCheckBox chckbxtempC2) {
-		this.chckbxtempC2 = chckbxtempC2;
+	public void setChckbxTempC2(JCheckBox chckbxTempC2) {
+		this.chckbxTempC2 = chckbxTempC2;
 	}
 
-	public JCheckBox getChckbxoximetria() {
-		return chckbxoximetria;
+	public JCheckBox getChckbxOximetria() {
+		return chckbxOximetria;
 	}
 
-	public void setChckbxoximetria(JCheckBox chckbxoximetria) {
-		this.chckbxoximetria = chckbxoximetria;
+	public void setChckbxOximetria(JCheckBox chckbxOximetria) {
+		this.chckbxOximetria = chckbxOximetria;
 	}
 
-	public JCheckBox getChckbxfluxoResp() {
-		return chckbxfluxoResp;
+	public JCheckBox getChckbxFluxoResp() {
+		return chckbxFluxoResp;
 	}
 
-	public void setChckbxfluxoResp(JCheckBox chckbxfluxoResp) {
-		this.chckbxfluxoResp = chckbxfluxoResp;
+	public void setChckbxFluxoResp(JCheckBox chckbxFluxoResp) {
+		this.chckbxFluxoResp = chckbxFluxoResp;
 	}
 
 	public JButton getBtnPrioridade() {
@@ -314,24 +317,24 @@ public class TelaTriagem extends JPanel {
 		this.btnLimpar = btnLimpar;
 	}
 
+	//checkBox são ativadas quando múltiplos atendimentos é selecionado
 	public void checkAtivado() {
 		chckbxFreqR.setEnabled(true);
-		chckbxfreqC.setEnabled(true);
-		chckbxtempC.setEnabled(true);
-		chckbxtempC2.setEnabled(true);
-		chckbxoximetria.setEnabled(true);
-		chckbxfluxoResp.setEnabled(true);
+		chckbxFreqC.setEnabled(true);
+		chckbxTempC.setEnabled(true);
+		chckbxTempC2.setEnabled(true);
+		chckbxOximetria.setEnabled(true);
+		chckbxFluxoResp.setEnabled(true);
 	}
 	
+	//checkBox são desativadas quando múltiplos atendimentos é desmarcado
 	public void checkDesativado ()
 	{
-			chckbxFreqR.setEnabled(false);
-			chckbxfreqC.setEnabled(false);
-			chckbxtempC.setEnabled(false);
-			chckbxtempC2.setEnabled(false);
-			chckbxoximetria.setEnabled(false);
-			chckbxfluxoResp.setEnabled(false);
-	}
-	
-	
+		chckbxFreqR.setEnabled(false);
+		chckbxFreqC.setEnabled(false);
+		chckbxTempC.setEnabled(false);
+		chckbxTempC2.setEnabled(false);			
+		chckbxOximetria.setEnabled(false);
+		chckbxFluxoResp.setEnabled(false);
+	}	
 }

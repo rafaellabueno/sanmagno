@@ -8,7 +8,8 @@ import javax.swing.JButton;
 
 public class TelaConfirmacao extends JPanel {
 
-	 private JButton btnMenu;
+	//Declaração dos componentes da tela
+	private JButton btnMenu;
 	
 	public TelaConfirmacao() {
 		setBackground(new Color(224, 255, 255));
@@ -26,6 +27,7 @@ public class TelaConfirmacao extends JPanel {
 
 	}
 
+	//getters e setters dos componentes da tela
 	public JButton getBtnMenu() {
 		return btnMenu;
 	}
@@ -33,8 +35,4 @@ public class TelaConfirmacao extends JPanel {
 	public void setBtnMenu(JButton btnMenu) {
 		this.btnMenu = btnMenu;
 	}
-
-	
-	
-	
 }

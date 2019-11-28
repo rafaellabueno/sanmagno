@@ -1,14 +1,18 @@
 package model;
 
+//lista duplamente encadeada de atendimentos encerrados
 public class ListaAtendimentosEncerrados {
-	private No primeiro;
-	private No ultimo;
+	//atributos da classe
+	private NoAtendimento primeiro;
+	private NoAtendimento ultimo;
 
+	//construtor da classe
 	public ListaAtendimentosEncerrados() {
 		this.primeiro = null;
 		this.ultimo = null;
 	}
 	
+	//método que retorna se a lista está vazia
 	public boolean estaVazia() {
 		if (this.primeiro == null) {
 			return true;
@@ -16,19 +20,22 @@ public class ListaAtendimentosEncerrados {
 		return false;
 	}
 	
-	public void adicionar(Paciente pac) {
+	//método para adicionar novos atendimentos na lista
+	public void adicionar(Atendimento ate) {
+		//se estiver vazia adiciona no começo
 		if(estaVazia()) {
-			No novo = new No(pac);
+			NoAtendimento novo = new NoAtendimento(ate);
 			this.primeiro = novo;
 			this.ultimo = novo;
 		}
 		else {
 			int cont = 0;
-			for(No aux = primeiro; aux != null; aux = aux.getProximo()) {
-				int comp = pac.getNome().compareToIgnoreCase(aux.getPaciente().getNome());
+			for(NoAtendimento aux = primeiro; aux != null; aux = aux.getProximo()) {
+				//inserir em ordem alfabética
+				int comp = ate.getPac().getNome().compareToIgnoreCase(aux.getAtendimento().getPac().getNome());
 				if(cont == 0) {
 					if(comp < 0){
-						No novo = new No(aux.getAnterior(), pac, aux);
+						NoAtendimento novo = new NoAtendimento(aux.getAnterior(), ate, aux);
 						if(aux.getAnterior() != null) {
 							aux.getAnterior().setProximo(novo);
 						}
@@ -42,25 +49,26 @@ public class ListaAtendimentosEncerrados {
 					}
 					//se forem iguais adiciona antes igual
 					else {
-						No novo = new No(aux.getAnterior(), pac, aux);
+						NoAtendimento novo = new NoAtendimento(aux.getAnterior(), ate, aux);
 						this.primeiro = novo;
 						cont++;
 					}
 				}
 			}
 			if(cont == 0) {
-				No novo = new No(this.ultimo, pac, null);
+				NoAtendimento novo = new NoAtendimento(this.ultimo, ate, null);
 				this.ultimo.setProximo(novo);
 				this.ultimo = novo;
 			}
 		}
 	}
 	
-	public No buscar(int cpf) {
-		No aux = primeiro;
+	//método para buscar o atendimento e consequentemente o paciente que possui o cpf informado
+	public NoAtendimento buscar(int cpf) {
+		NoAtendimento aux = primeiro;
 		if(! this.estaVazia()) {
 			do {
-				if (aux.getPaciente().getCpf() == cpf) {
+				if (aux.getAtendimento().getPac().getCpf() == cpf) {
 					return aux;
 				}
 				aux = aux.getProximo();
@@ -69,96 +77,19 @@ public class ListaAtendimentosEncerrados {
         return null;
 	}
 	
-	public No buscarInverso(Paciente pac) {
-		No aux = ultimo;
-		if(! this.estaVazia()) {
-			do {
-				if (aux.getPaciente() == pac) {
-					return aux;
-				}
-				aux = aux.getAnterior();
-			} while (aux != ultimo);
-		}
-        return null;
-	}
-	
-	public void removerInicio(Paciente pac) {
-		No p = primeiro;
-		if(p.getPaciente() != pac ) {
-			No aux = primeiro;
-				do {
-					No remover = aux.getProximo();
-					No proxRemover = remover.getProximo();
-					if (remover.getPaciente() == pac) {
-					    aux.setProximo(proxRemover);
-					    proxRemover.setAnterior(aux);
-					    break;
-					}
-					aux = aux.getProximo();
-				}while(aux != primeiro);
-		}
-		else {
-			this.primeiro = p.getProximo();
-			this.primeiro.setAnterior(ultimo);
-			this.ultimo.setProximo(primeiro);
-		}
-	}
-	
-	public void removerFinal(Paciente pac) {
-		No p = ultimo;
-		if(p.getPaciente() != pac ) {
-			No aux = ultimo;
-			do {
-				No remover = aux.getAnterior();
-				No antRemover = remover.getAnterior();
-				if (remover.getPaciente() == pac) {
-				    aux.setAnterior(antRemover);
-				    antRemover.setProximo(aux);
-				    break;
-				}
-				aux = aux.getAnterior();
-			}while(aux != ultimo);
-		}
-		else {
-			this.ultimo = p.getAnterior();
-			this.primeiro.setAnterior(ultimo);
-			this.ultimo.setProximo(primeiro);
-		}
-	}
-	
+	//método para imprimir a lista
 	public void imprimir() {
 		if(! this.estaVazia()) {
-			for(No aux = primeiro; aux != null; aux = aux.getProximo()) {
-			    System.out.println(aux.getPaciente().getNome());
+			for(NoAtendimento aux = primeiro; aux != null; aux = aux.getProximo()) {
+			    System.out.println(aux.getAtendimento().getPac().getNome());
 			} 
 		}
 		
     }
 	
-	public void imprimirInverso() {
-		No aux;		
-		aux = ultimo;
-		if(! this.estaVazia()) {
-			do {
-			    System.out.println(aux.getPaciente());
-			    aux = aux.getAnterior();
-			} while (aux != ultimo);
-		}
-    }
-	
+	//método para limpar a lista
 	public void limpar() {
 		this.primeiro = null;
 		this.ultimo = null;
-	}
-	
-	public boolean existeLoop() {
-		No aux;	
-		aux = primeiro;
-		if(! this.estaVazia()) {
-			do {
-			    aux = aux.getProximo();
-			} while (aux != primeiro);
-		}
-		return false;
 	}
 }
