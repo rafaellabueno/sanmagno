@@ -1,18 +1,20 @@
 package model;
 
+import java.text.DateFormat;
+
 public class Atendimento {
 	//atributos da classe
 	private int senha;
 	private Paciente pac;
-	private int dataC, horaC, dataS, horaS;
+	private int dataS, horaS;
+	private String dataC;
 	
 	//construtor
-	public Atendimento(Paciente pac, int dataC, int horaC, int senha) {
+	public Atendimento(Paciente pac, String dataC, int senha) {
 		super();
 		this.senha = senha;
 		this.pac = pac;
 		this.dataC = dataC;
-		this.horaC = horaC;
 		this.dataS = 0;
 		this.horaS = 0;
 	}
@@ -34,20 +36,12 @@ public class Atendimento {
 		this.pac = pac;
 	}
 
-	public int getDataC() {
+	public String getDataC() {
 		return dataC;
 	}
 
-	public void setDataC(int dataC) {
+	public void setDataC(String dataC) {
 		this.dataC = dataC;
-	}
-
-	public int getHoraC() {
-		return horaC;
-	}
-
-	public void setHoraC(int horaC) {
-		this.horaC = horaC;
 	}
 
 	public int getDataS() {

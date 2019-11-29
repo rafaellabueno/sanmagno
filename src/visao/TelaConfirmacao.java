@@ -15,7 +15,6 @@ public class TelaConfirmacao extends JPanel {
 
 	//Declaração dos componentes da tela
 	private JButton btnMenu;
-	ImageIcon  imgConfirma = new ImageIcon(getClass().getResource("cadastroSucesso.png"));
 	private JLabel lblConfirma;
 	private JPanel panel;
 	
@@ -28,7 +27,7 @@ public class TelaConfirmacao extends JPanel {
 		add(panel, "cell 0 0,alignx left,aligny top");
 		panel.setLayout(new MigLayout("", "[500px][61px]", "[500px]"));
 				
-		lblConfirma = new JLabel(new ImageIcon(TelaConfirmacao.class.getResource("/visao/cadastroSucesso.png")));
+		lblConfirma = new JLabel(new ImageIcon(TelaConfirmacao.class.getResource("/img/cadastroSucesso.png")));
 		lblConfirma.setText("");
 		lblConfirma.setSize(60, 60);
 		panel.add(lblConfirma, "cell 0 0,alignx center,growy");

@@ -30,7 +30,6 @@ public class TelaCadastro extends JPanel {
 	private JPanel panel_3;
 	private JLabel lblTelaCadastro;
 	private JLabel label;
-	ImageIcon  imagem = new ImageIcon(getClass().getResource("user.png"));
 	
 
 	/**
@@ -55,7 +54,7 @@ public class TelaCadastro extends JPanel {
 		lblTelaCadastro.setFont(new Font("Tahoma", Font.BOLD, 25));
 		panel_3.add(lblTelaCadastro, "flowy,cell 0 0");
 		
-		label = new JLabel(new ImageIcon(TelaCadastro.class.getResource("/visao/user.png")));
+		label = new JLabel(new ImageIcon(TelaCadastro.class.getResource("/img/user.png")));
 		label.setHorizontalAlignment(SwingConstants.TRAILING);
 		panel_3.add(label, "cell 0 0,alignx center");
 		

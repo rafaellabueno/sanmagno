@@ -9,6 +9,6 @@ public class App {
 		JanelaPrincipal j = new JanelaPrincipal();
 		j.setVisible(true);
 		Paciente p = new Paciente();
-		Controller pcon = new Controller(j, p);	
+		AtendimentoController acon = new AtendimentoController(j, p);	
 	}
 }

@@ -23,8 +23,6 @@ public class TelaConsulta extends JPanel {
 	private JPanel panel_1;
 	private JPanel panel_2;
 	private JLabel label;
-
-	ImageIcon imgPessoas = new ImageIcon(getClass().getResource("pessoas.png"));
 	private JLabel lblFotoPessoas;
 	private JPanel panel_3;
 
@@ -49,7 +47,7 @@ public class TelaConsulta extends JPanel {
 		label.setFont(new Font("Tahoma", Font.BOLD, 25));
 		panel_2.add(label, "flowy,cell 0 0");
 
-		lblFotoPessoas = new JLabel(new ImageIcon(TelaConsulta.class.getResource("/visao/pessoas.png")));
+		lblFotoPessoas = new JLabel(new ImageIcon(TelaConsulta.class.getResource("/img/pessoas.png")));
 		lblFotoPessoas.setText("");
 		lblFotoPessoas.setSize(66, 66);
 		panel_2.add(lblFotoPessoas, "cell 0 0,alignx center");

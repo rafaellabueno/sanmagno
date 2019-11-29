@@ -92,4 +92,9 @@ public class ListaAtendimentosEncerrados {
 		this.primeiro = null;
 		this.ultimo = null;
 	}
+	
+	//método para retornar o primeiro da lista
+	public NoAtendimento primeiro() {
+		return this.primeiro;
+	}
 }

@@ -1,25 +1,33 @@
 package visao;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JComboBox;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JList;
+import java.awt.Scrollbar;
+import java.util.Vector;
 
 public class TelaFilasDePrioridades extends JPanel {
 
 	//Declaração dos componentes da tela
 	private JComboBox<String> comboPrioridade;
 	private JButton btnPesquisarPrioridade;
-	private JLabel lblPacientePrioridade;
+	private JList list;
+	private Scrollbar scrollbar;
+	private DefaultListModel listModel;
 
 	/**
 	 * Create the panel.
 	 */
 	public TelaFilasDePrioridades() {
-		setLayout(new MigLayout("", "[][][][]", "[][][][][][]"));
+		setLayout(new MigLayout("", "[grow][][][]", "[][][][][][][grow]"));
 
 		JLabel lblFilasDePrioridades = new JLabel("Filas de Prioridades");
 		lblFilasDePrioridades.setForeground(new Color(0, 128, 128));
@@ -47,10 +55,13 @@ public class TelaFilasDePrioridades extends JPanel {
 		JLabel lblPacientes = new JLabel("Pacientes");
 		lblPacientes.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		add(lblPacientes, "cell 0 4");
-
-		lblPacientePrioridade = new JLabel("");
-		lblPacientePrioridade.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		add(lblPacientePrioridade, "cell 0 5 2 1,growx");
+		
+		listModel = new DefaultListModel();
+		list = new JList(listModel);
+		add(list, "flowx,cell 0 5 4 2,grow");
+		
+		scrollbar = new Scrollbar();
+		add(scrollbar, "cell 2 5 2 1,grow");
 	}
 	
 	//getters e setters dos componentes da tela
@@ -70,12 +81,16 @@ public class TelaFilasDePrioridades extends JPanel {
 		this.btnPesquisarPrioridade = btnPesquisarPrioridade;
 	}
 
-	public JLabel getLblPacientePrioridade() {
-		return lblPacientePrioridade;
+	public JList getList() {
+		return list;
 	}
 
-	public void setLblPacientePrioridade(JLabel lblPacientePrioridade) {
-		this.lblPacientePrioridade = lblPacientePrioridade;
+	public void setList(JList list) {
+		this.list = list;
 	}
-
+	
+	public void adicionaItem(Vector vetor) {
+		list.setListData(vetor);
+	}
+	
 }

@@ -41,9 +41,13 @@ public class TelaProxPac extends JPanel {
 		lblPrioridadeProx.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		add(lblPrioridadeProx, "cell 0 3");
 		
+		JButton btnEncerrarAtendimento = new JButton("Encerrar Atendimento");
+		btnEncerrarAtendimento.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		add(btnEncerrarAtendimento, "flowx,cell 0 9");
+		
 		btnVoltar = new JButton("Voltar");
 		btnVoltar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(btnVoltar, "cell 4 9");
+		add(btnVoltar, "cell 0 9");
 
 	}
 

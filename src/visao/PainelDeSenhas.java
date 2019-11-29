@@ -23,7 +23,6 @@ public class PainelDeSenhas extends JPanel {
 	private JPanel panel;
 	private JPanel panel_2;
 	private JLabel label;
-	ImageIcon  imagem = new ImageIcon(getClass().getResource("senha.png"));
 	private JPanel panel_3;
 	private JLabel lblNewLabel;
 
@@ -48,7 +47,7 @@ public class PainelDeSenhas extends JPanel {
 		lblPainelDeSenhas.setForeground(new Color(255, 255, 255));
 		lblPainelDeSenhas.setFont(new Font("Tahoma", Font.BOLD, 25));
 		
-		label = new JLabel(new ImageIcon(TelaCadastro.class.getResource("/visao/senha.png")));
+		label = new JLabel(new ImageIcon(TelaCadastro.class.getResource("/img/senha.png")));
 		label.setBackground(new Color(102, 205, 170));
 		panel_3.add(label, "cell 0 0,alignx center");
 		label.setHorizontalAlignment(SwingConstants.TRAILING);
@@ -67,6 +66,7 @@ public class PainelDeSenhas extends JPanel {
 	    add(panel_2, "cell 0 4 6 1,grow");
 	    
 	    btnTriagem = new JButton("Triagem");
+	    btnTriagem.setEnabled(false);
 	    panel_2.add(btnTriagem);
 	    btnTriagem.setFont(new Font("Tahoma", Font.PLAIN, 14));
 	    
@@ -144,4 +144,14 @@ public class PainelDeSenhas extends JPanel {
 	public void setLblAviso(JLabel lblAviso) {
 		this.lblAviso = lblAviso;
 	}	
+	
+	//botao da triagem só é liberado se pacientes com senha
+	public void botaoTriagem() {
+		btnTriagem.setEnabled(true);
+	}
+
+	// botao da triagem é ocultado
+	public void botaoTriagemDesabilitar() {
+		btnTriagem.setEnabled(false);
+	}
 }

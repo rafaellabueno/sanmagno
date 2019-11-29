@@ -1,5 +1,11 @@
 package model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Calendar;
+
 //lista duplamente encadeada de pacientes
 public class ListaPaciente {
 	//atributos da classe
@@ -32,36 +38,39 @@ public class ListaPaciente {
 			this.ultimo = novo;
 		}
 		else {
-			int cont = 0;
-			for(No aux = primeiro; aux != null; aux = aux.getProximo()) {
-				//inserir em ordem alfabética
-				int comp = pac.getNome().compareToIgnoreCase(aux.getPaciente().getNome());
-				if(cont == 0) {
-					if(comp < 0){
-						No novo = new No(aux.getAnterior(), pac, aux);
-						if(aux.getAnterior() != null) {
-							aux.getAnterior().setProximo(novo);
+			No p = buscar(pac.getCpf());
+			if(p == null) {
+				int cont = 0;
+				for(No aux = primeiro; aux != null; aux = aux.getProximo()) {
+					//inserir em ordem alfabética
+					int comp = pac.getNome().compareToIgnoreCase(aux.getPaciente().getNome());
+					if(cont == 0) {
+						if(comp < 0){
+							No novo = new No(aux.getAnterior(), pac, aux);
+							if(aux.getAnterior() != null) {
+								aux.getAnterior().setProximo(novo);
+							}
+							aux.setAnterior(novo);
+							if(this.primeiro.equals(aux)) {
+								this.primeiro = novo;
+							}
+							cont++;
+						} else if(comp > 0) {
+							
 						}
-						aux.setAnterior(novo);
-						if(this.primeiro.equals(aux)) {
+						//se forem iguais adiciona antes igual
+						else {
+							No novo = new No(aux.getAnterior(), pac, aux);
 							this.primeiro = novo;
+							cont++;
 						}
-						cont++;
-					} else if(comp > 0) {
-						
-					}
-					//se forem iguais adiciona antes igual
-					else {
-						No novo = new No(aux.getAnterior(), pac, aux);
-						this.primeiro = novo;
-						cont++;
 					}
 				}
-			}
-			if(cont == 0) {
-				No novo = new No(this.ultimo, pac, null);
-				this.ultimo.setProximo(novo);
-				this.ultimo = novo;
+				if(cont == 0) {
+					No novo = new No(this.ultimo, pac, null);
+					this.ultimo.setProximo(novo);
+					this.ultimo = novo;
+				}
 			}
 		}
 	}
@@ -69,10 +78,15 @@ public class ListaPaciente {
 	//método para gerar a senha do paciente para ser chamado para a triagem
 	public int gerarSenha(String cpf) {
 		No p = buscar(cpf);
-		int data = 21/12/2000;
-		int hora = 2;
+		DateFormat data = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		Calendar cal = Calendar.getInstance();
+		String d = data.format(cal.getTime());
+		//DateFormat dataCerta = data.
+		//int data = 21/12/2000;
+		//int hora = 2;
+		System.out.println(data);
 		this.senha++;
-		Atendimento a = new Atendimento(p.getPaciente(), data, hora, this.senha);
+		Atendimento a = new Atendimento(p.getPaciente(), d, this.senha);
 		filaA.empilhar(a);
 		return this.senha;
 		

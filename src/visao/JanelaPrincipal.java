@@ -32,16 +32,16 @@ public class JanelaPrincipal extends JFrame {
 	private PainelDeSenhas tSenha;
 	private TelaTriagem tTriagem;
 	private TelaProxPac tProxPac;
+	private TelaListaAtendEncer tListEnce;
 	private TelaAtendEncer tAtendEnc; 
 	private JMenuItem menuCadastro;
 	private JMenuItem menuConsulta;
 	private JMenuItem mntmPainelDeSenhas;
 	private JMenuItem mntmAtendEnce;
+	private JMenuItem mntmListEnce;
 	private JMenuItem mntmFilaPrioridade;
 	private JMenuItem mntmProxAtend;
 	private JMenuItem mntmGerarRelatorio;
-	
-	ImageIcon  imgLogo = new ImageIcon(getClass().getResource("logo.png"));
 	private JLabel lblFotoLogo;
 	private JPanel panel;
 
@@ -75,9 +75,13 @@ public class JanelaPrincipal extends JFrame {
 		mntmPainelDeSenhas.setActionCommand("menuSenha");
 		mnAtendimento.add(mntmPainelDeSenhas);
 
-		mntmAtendEnce = new JMenuItem("Atendimentos Encerrados");
+		mntmAtendEnce = new JMenuItem("Encerrar Antendimento");
 		mntmAtendEnce.setActionCommand("menuEnce");
 		mnAtendimento.add(mntmAtendEnce);
+		
+		mntmListEnce = new JMenuItem("Lista de Atendimentos Encerrados");
+		mntmListEnce.setActionCommand("menuListEnce");
+		mnAtendimento.add(mntmListEnce);
 
 		JMenu mnPrioridade = new JMenu("Prioridade");
 		menuBar.add(mnPrioridade);
@@ -113,7 +117,7 @@ public class JanelaPrincipal extends JFrame {
 		panel.setBackground(new Color(102, 205, 170));
 		add(panel, "cell 0 1 0 0,grow");
 				
-		lblFotoLogo = new JLabel(new ImageIcon(TelaConsulta.class.getResource("/visao/logo.png")));				
+		lblFotoLogo = new JLabel(new ImageIcon(TelaConsulta.class.getResource("/img/logo.png")));				
 		lblFotoLogo.setText("");
 		lblFotoLogo.setSize(20, 20);
 		panel.add(lblFotoLogo, "cell 0 0,alignx center");
@@ -127,6 +131,7 @@ public class JanelaPrincipal extends JFrame {
 		tPri = new TelaFilasDePrioridades();
 		tProxPac = new TelaProxPac();
         tAtendEnc = new TelaAtendEncer(); 
+        tListEnce = new TelaListaAtendEncer();
 	}
 
 	//getters e setters das telas e componentes
@@ -245,7 +250,21 @@ public class JanelaPrincipal extends JFrame {
 	public void setTatendenc(TelaAtendEncer tAtendEnc) {
 		this.tAtendEnc = tAtendEnc;
 	}
-	
-	
 
+	public JMenuItem getMntmListEnce() {
+		return mntmListEnce;
+	}
+
+	public void setMntmListEnce(JMenuItem mntmListEnce) {
+		this.mntmListEnce = mntmListEnce;
+	}
+
+	public TelaListaAtendEncer getTListEnce() {
+		return tListEnce;
+	}
+
+	public void setTListEnce(TelaListaAtendEncer tListEnce) {
+		this.tListEnce = tListEnce;
+	}
+	
 }
