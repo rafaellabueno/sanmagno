@@ -81,10 +81,7 @@ public class ListaPaciente {
 		DateFormat data = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		Calendar cal = Calendar.getInstance();
 		String d = data.format(cal.getTime());
-		//DateFormat dataCerta = data.
-		//int data = 21/12/2000;
-		//int hora = 2;
-		System.out.println(data);
+		//System.out.println(d);
 		this.senha++;
 		Atendimento a = new Atendimento(p.getPaciente(), d, this.senha);
 		filaA.empilhar(a);

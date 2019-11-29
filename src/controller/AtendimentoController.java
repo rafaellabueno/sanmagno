@@ -364,14 +364,12 @@ public class AtendimentoController implements ActionListener {
 			try {
 				String cpf = (this.jan.getTatendenc().getTextCpf().getText());
 				Atendimento atAtual = listaAtenEnc.buscar(cpf).getAtendimento();
-				String data = this.jan.getTatendenc().getTextDataS().getText();
+				atAtual.setDataS(this.jan.getTatendenc().getTextDataS().getText());
+				atAtual.setHoraS(this.jan.getTatendenc().getTextHorasS().getText());
 				
+				//18:21:12
 				String hora = this.jan.getTatendenc().getTextHorasS().getText();
-				String dataCerta = " "+hora;
 				
-				
-				atAtual.setDataS(Integer.parseInt(this.jan.getTatendenc().getTextDataS().getText()));
-				atAtual.setHoraS(Integer.parseInt(this.jan.getTatendenc().getTextHorasS().getText()));
 			} catch (Exception e) {
 				this.jan.getTatendenc().getLblAviso().setText("Campos com valores inadequados");
 			}

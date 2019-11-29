@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 
 public class TelaAtendEncer extends JPanel {
 	

@@ -6,8 +6,7 @@ public class Atendimento {
 	//atributos da classe
 	private int senha;
 	private Paciente pac;
-	private int dataS, horaS;
-	private String dataC;
+	private String dataC, dataS, horaS;
 	
 	//construtor
 	public Atendimento(Paciente pac, String dataC, int senha) {
@@ -15,8 +14,8 @@ public class Atendimento {
 		this.senha = senha;
 		this.pac = pac;
 		this.dataC = dataC;
-		this.dataS = 0;
-		this.horaS = 0;
+		this.dataS = null;
+		this.horaS = null;
 	}
 
 	//getters e setters dos atributos
@@ -44,19 +43,19 @@ public class Atendimento {
 		this.dataC = dataC;
 	}
 
-	public int getDataS() {
+	public String getDataS() {
 		return dataS;
 	}
 
-	public void setDataS(int dataS) {
+	public void setDataS(String dataS) {
 		this.dataS = dataS;
 	}
 
-	public int getHoraS() {
+	public String getHoraS() {
 		return horaS;
 	}
 
-	public void setHoraS(int horaS) {
+	public void setHoraS(String horaS) {
 		this.horaS = horaS;
 	}
 	
