@@ -250,12 +250,20 @@ public class AtendimentoController implements ActionListener {
 				this.jan.getTtriagem().checkDesativado();
 			}
 		}
+		
+		
 
 		//Tela de prioridades
+	
 		if (arg0.getActionCommand().equals("menuPrioridade")) {
 			this.jan.setContentPane(this.jan.getTfpri());
 			this.jan.revalidate();
-			this.jan.revalidate();
+			//this.jan.revalidate();
+			this.jan.repaint();
+			Vector vector = new Vector(); 
+			vector.add(null); 
+			this.jan.getTfpri().adicionaItem(vector);
+		
 			
 		}
 
