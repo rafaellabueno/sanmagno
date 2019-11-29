@@ -72,7 +72,7 @@ public class ListaAtendimentosEncerrados {
 					return aux;
 				}
 				aux = aux.getProximo();
-			} while (aux != primeiro);
+			} while (aux != null);
 		}
         return null;
 	}
