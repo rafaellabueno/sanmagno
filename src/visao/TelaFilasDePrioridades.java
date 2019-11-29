@@ -58,6 +58,7 @@ public class TelaFilasDePrioridades extends JPanel {
 		
 		listModel = new DefaultListModel();
 		list = new JList(listModel);
+		list.setToolTipText("");
 		add(list, "flowx,cell 0 5 4 2,grow");
 		
 		scrollbar = new Scrollbar();

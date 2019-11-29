@@ -74,10 +74,6 @@ public class JanelaPrincipal extends JFrame {
 		mntmPainelDeSenhas = new JMenuItem("Painel de Senhas");
 		mntmPainelDeSenhas.setActionCommand("menuSenha");
 		mnAtendimento.add(mntmPainelDeSenhas);
-
-		mntmAtendEnce = new JMenuItem("Encerrar Antendimento");
-		mntmAtendEnce.setActionCommand("menuEnce");
-		mnAtendimento.add(mntmAtendEnce);
 		
 		mntmListEnce = new JMenuItem("Lista de Atendimentos Encerrados");
 		mntmListEnce.setActionCommand("menuListEnce");

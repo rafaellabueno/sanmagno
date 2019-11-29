@@ -12,7 +12,7 @@ public class TelaProxPac extends JPanel {
 	//Declaração dos componentes da tela
 	private JLabel lblNomeProx;
 	private JLabel lblPrioridadeProx;
-	private JButton btnVoltar; 
+	private JButton btnEncerrarAtendimento; 
 
 	/**
 	 * Create the panel.
@@ -20,7 +20,7 @@ public class TelaProxPac extends JPanel {
 	public TelaProxPac() {
 		setLayout(new MigLayout("", "[][][][][]", "[][][][][][][][][][]"));
 
-		JLabel lblPrximoPaciente = new JLabel("Pr\u00F3ximo Paciente");
+		JLabel lblPrximoPaciente = new JLabel("Chamada De Paciente");
 		lblPrximoPaciente.setForeground(new Color(0, 128, 128));
 		lblPrximoPaciente.setFont(new Font("Tahoma", Font.BOLD, 25));
 		add(lblPrximoPaciente, "cell 0 0");
@@ -41,13 +41,9 @@ public class TelaProxPac extends JPanel {
 		lblPrioridadeProx.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		add(lblPrioridadeProx, "cell 0 3");
 		
-		JButton btnEncerrarAtendimento = new JButton("Encerrar Atendimento");
+		btnEncerrarAtendimento = new JButton("Encerrar Atendimento");
 		btnEncerrarAtendimento.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		add(btnEncerrarAtendimento, "flowx,cell 0 9");
-		
-		btnVoltar = new JButton("Voltar");
-		btnVoltar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(btnVoltar, "cell 0 9");
 
 	}
 
@@ -68,13 +64,15 @@ public class TelaProxPac extends JPanel {
 		this.lblPrioridadeProx = lblPrioridadeProx;
 	}
 
-	public JButton getBtnVoltar() {
-		return btnVoltar;
+	public JButton getBtnEncerrarAtendimento() {
+		return btnEncerrarAtendimento;
 	}
 
-	public void setBtnVoltar(JButton btnVoltar) {
-		this.btnVoltar = btnVoltar;
+	public void setBtnEncerrarAtendimento(JButton btnEncerrarAtendimento) {
+		this.btnEncerrarAtendimento = btnEncerrarAtendimento;
 	}
+
+	
 	
 	
 

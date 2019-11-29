@@ -48,8 +48,6 @@ public class AtendimentoController implements ActionListener {
 		//Menu item para mudança de telas
 		this.jan.getMntmPainelDeSenhas().addActionListener(this);
 		this.jan.getMntmProxAtend().addActionListener(this);
-		this.jan.getMntmAtendEnce().addActionListener(this);
-		this.jan.getMntmAtendEnce().addActionListener(this);
 		this.jan.getMntmFilaPrioridade().addActionListener(this);
 		this.jan.getMntmListEnce().addActionListener(this);
 		
@@ -65,8 +63,8 @@ public class AtendimentoController implements ActionListener {
 		this.jan.getTtriagem().getBtnVoltar().addActionListener(this);
 		this.jan.getTtriagem().getBtnLimpar().addActionListener(this);
 		
-		//Botão de voltar na tela de próximo paciente a ser atendido
-		this.jan.getTproxpac().getBtnVoltar().addActionListener(this);
+		//Botão para ir para a tela de atendimentos encerrados
+		this.jan.getTproxpac().getBtnEncerrarAtendimento().addActionListener(this);
 		
 		//Ações relacionados a tela de atendimentos encerrados
 		this.jan.getTatendenc().getBtnLimpar().addActionListener(this);
@@ -80,6 +78,7 @@ public class AtendimentoController implements ActionListener {
 		filaP3 = new FilaPrioridade();
 		filaP4 = new FilaPrioridade();
 		filaP5 = new FilaPrioridade();
+		
 		
 		pCon = new PacienteController(jan, pac);
 		listaAtenEnc = new ListaAtendimentosEncerrados();
@@ -110,6 +109,8 @@ public class AtendimentoController implements ActionListener {
 			this.jan.getTtriagem().getChckbxSituacaoDeRisco().setSelected(false);
 			this.jan.getTtriagem().getChckbxTempC().setSelected(false);
 			this.jan.getTtriagem().getChckbxTempC2().setSelected(false);
+			this.jan.getTtriagem().getLblPrioridade().setText("");
+			this.jan.getTtriagem().getLblNomePaciente().setText("");
 			this.jan.getTatendenc().getTextCpf().setText("");
 			this.jan.getTatendenc().getTextDataS().setText("");
 			this.jan.getTatendenc().getTextHorasS().setText("");
@@ -156,6 +157,23 @@ public class AtendimentoController implements ActionListener {
 			this.jan.setContentPane(this.jan.getTtriagem());
 			this.jan.revalidate();
 			this.jan.revalidate();
+			this.jan.getTtriagem().getChckbxApneia().setSelected(false);
+			this.jan.getTtriagem().getChckbxConfusoDesorientado().setSelected(false);
+			this.jan.getTtriagem().getChckbxDor().setSelected(false);
+			this.jan.getTtriagem().getChckbxEntubado().setSelected(false);
+			this.jan.getTtriagem().getChckbxFluxoResp().setSelected(false);
+			this.jan.getTtriagem().getChckbxfreqC().setSelected(false);
+			this.jan.getTtriagem().getChckbxFreqR().setSelected(false);
+			this.jan.getTtriagem().getChckbxLetargico().setSelected(false);
+			this.jan.getTtriagem().getChckbxOutrosP().setSelected(false);
+			this.jan.getTtriagem().getChckbxOximetria().setSelected(false);
+			this.jan.getTtriagem().getChckbxProcedimentos().setSelected(false);
+			this.jan.getTtriagem().getChckbxSemPulso().setSelected(false);
+			this.jan.getTtriagem().getChckbxSemReacao().setSelected(false);
+			this.jan.getTtriagem().getChckbxSituacaoDeRisco().setSelected(false);
+			this.jan.getTtriagem().getChckbxTempC().setSelected(false);
+			this.jan.getTtriagem().getChckbxTempC2().setSelected(false);
+			this.jan.getTtriagem().getLblPrioridade().setText("");
 			this.jan.getTtriagem().getLblNomePaciente().setText(proxAtendimento.getPac().getNome());
 
 		}
@@ -238,7 +256,6 @@ public class AtendimentoController implements ActionListener {
 			this.jan.setContentPane(this.jan.getTfpri());
 			this.jan.revalidate();
 			this.jan.revalidate();
-		//	Vector vector = new Vector();
 			
 		}
 
@@ -247,6 +264,7 @@ public class AtendimentoController implements ActionListener {
 			String prioridade = (String) (this.jan.getTfpri().getComboPrioridade().getSelectedItem());
 			Vector vector = new Vector();
 			switch (prioridade) {
+		
 			case "Prioridade 1":
 				for (NoFila aux = filaP1.topo(); aux != null; aux = aux.getProximo()) {
 					vector.add(aux.getAtendimento().getPac().getNome());
@@ -325,10 +343,13 @@ public class AtendimentoController implements ActionListener {
 		}
 
 		//Tela de atendimentos encerrados
-		if (arg0.getActionCommand().equals("menuEnce")) {
+		if (arg0.getActionCommand().equals("Encerrar Atendimento")) {
 			this.jan.setContentPane(this.jan.getTatendenc());
 			this.jan.revalidate();
 			this.jan.repaint();
+			this.jan.getTatendenc().getTextCpf().setText("");
+			this.jan.getTatendenc().getTextDataS().setText("");
+			this.jan.getTatendenc().getTextHorasS().setText("");
 		}
 		
 		//Tela da lista de atendimentos encerrados

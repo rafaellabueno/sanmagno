@@ -46,7 +46,7 @@ public class TelaTriagem extends JPanel {
 		lblTelaTriagem.setFont(new Font("Tahoma", Font.BOLD, 25));
 		add(lblTelaTriagem, "cell 0 0");
 
-		JLabel lblSelecioneAPrioridade = new JLabel("Selecione as informa\u00E7\u00F5es corresponde ao paciente");
+		JLabel lblSelecioneAPrioridade = new JLabel("Selecione as informa\u00E7\u00F5es que correspondem o(a) paciente:");
 		lblSelecioneAPrioridade.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		add(lblSelecioneAPrioridade, "flowx,cell 0 1");
 
