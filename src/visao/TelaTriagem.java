@@ -8,6 +8,8 @@ import java.awt.Color;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
+import javax.swing.ImageIcon;
 
 public class TelaTriagem extends JPanel {
 
@@ -34,115 +36,155 @@ public class TelaTriagem extends JPanel {
 	private JLabel lblPrioridade;
 	private JButton btnVoltar;
 	private JButton btnLimpar;
+	private JPanel panel;
+	private JPanel panel_1;
+	private JLabel lblFotoTriagem;
 
 	/**
 	 * Create the panel.
 	 */
 	public TelaTriagem() {
-		setLayout(new MigLayout("", "[]", "[][][][][][][][][][][][][][][][][][][][][][][]"));
-
-		JLabel lblTelaTriagem = new JLabel("Tela Triagem");
-		lblTelaTriagem.setForeground(new Color(0, 128, 128));
-		lblTelaTriagem.setFont(new Font("Tahoma", Font.BOLD, 25));
-		add(lblTelaTriagem, "cell 0 0");
-
-		JLabel lblSelecioneAPrioridade = new JLabel("Selecione as informa\u00E7\u00F5es que correspondem o(a) paciente:");
-		lblSelecioneAPrioridade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(lblSelecioneAPrioridade, "flowx,cell 0 1");
+		setBackground(new Color(102, 205, 170));
+		setLayout(new MigLayout("", "[grow]", "[][][][][grow][grow][][][][][]"));
+				
+						JLabel lblTelaTriagem = new JLabel("Tela Triagem");
+						lblTelaTriagem.setForeground(new Color(255, 255, 255));
+						lblTelaTriagem.setFont(new Font("Tahoma", Font.BOLD, 25));
+						add(lblTelaTriagem, "flowy,cell 0 0,alignx center");
+		
+				JLabel lblSelecioneAPrioridade = new JLabel("Selecione as informa\u00E7\u00F5es que correspondem o(a) paciente:");
+				lblSelecioneAPrioridade.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				add(lblSelecioneAPrioridade, "cell 0 2");
+		
+		panel = new JPanel();
+		panel.setBackground(new Color(255, 255, 255));
+		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		add(panel, "cell 0 4,grow");
+		panel.setLayout(new MigLayout("", "[][][]", "[][][][]"));
 
 		chckbxEntubado = new JCheckBox("Entubado");
+		chckbxEntubado.setBackground(new Color(255, 255, 255));
+		panel.add(chckbxEntubado, "cell 0 0");
 		chckbxEntubado.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(chckbxEntubado, "flowx,cell 0 3");
+		
+				chckbxDor = new JCheckBox("Dor/Sofrimento agudo");
+				chckbxDor.setBackground(new Color(255, 255, 255));
+				panel.add(chckbxDor, "cell 1 0");
+				chckbxDor.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				
+						chckbxSituacaoDeRisco = new JCheckBox("Situa\u00E7\u00E3o de risco");
+						chckbxSituacaoDeRisco.setBackground(new Color(255, 255, 255));
+						panel.add(chckbxSituacaoDeRisco, "cell 2 0");
+						chckbxSituacaoDeRisco.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		chckbxApneia = new JCheckBox("Apneia");
+		chckbxApneia.setBackground(new Color(255, 255, 255));
+		panel.add(chckbxApneia, "cell 0 1");
 		chckbxApneia.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(chckbxApneia, "flowx,cell 0 5");
+		
+				chckbxLetargico = new JCheckBox("Let\u00E1rgico");
+				chckbxLetargico.setBackground(new Color(255, 255, 255));
+				panel.add(chckbxLetargico, "cell 1 1");
+				chckbxLetargico.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		chckbxSemPulso = new JCheckBox("Sem pulso");
+		chckbxSemPulso.setBackground(new Color(255, 255, 255));
+		panel.add(chckbxSemPulso, "cell 2 1");
 		chckbxSemPulso.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(chckbxSemPulso, "flowx,cell 0 6");
-
-		chckbxProcedimentos = new JCheckBox(
-				"M\u00FAltiplos atendimentos (raio x, exames laboratoriais, inje\u00E7\u00F5es) ");
-		chckbxProcedimentos.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		chckbxProcedimentos.setActionCommand("Procedimentos");
-		add(chckbxProcedimentos, "cell 0 8");
-
-		chckbxFreqC = new JCheckBox("Frequ\u00EAncia Card\u00EDaca > 90");
-		chckbxFreqC.setEnabled(false);
-		chckbxFreqC.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		add(chckbxFreqC, "flowx,cell 0 10");
-
-		chckbxFreqR = new JCheckBox("Frequ\u00EAncia Respirat\u00F3rio > 20");
-		chckbxFreqR.setEnabled(false);
-		chckbxFreqR.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		add(chckbxFreqR, "flowx,cell 0 12");
-
-		chckbxTempC = new JCheckBox("Temperatura Corporal < 36 ");
-		chckbxTempC.setEnabled(false);
-		chckbxTempC.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		add(chckbxTempC, "flowx,cell 0 13");
-
-		chckbxOutrosP = new JCheckBox("Outros procedimentos");
-		chckbxOutrosP.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(chckbxOutrosP, "flowx,cell 0 14");
-
-		chckbxDor = new JCheckBox("Dor/Sofrimento agudo");
-		chckbxDor.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(chckbxDor, "cell 0 3,alignx right");
-
-		chckbxLetargico = new JCheckBox("Let\u00E1rgico");
-		chckbxLetargico.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(chckbxLetargico, "cell 0 5");
-
-		chckbxSituacaoDeRisco = new JCheckBox("Situa\u00E7\u00E3o de risco");
-		chckbxSituacaoDeRisco.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(chckbxSituacaoDeRisco, "cell 0 5");
-
-		chckbxSemReacao = new JCheckBox("Sem rea\u00E7\u00E3o");
-		chckbxSemReacao.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(chckbxSemReacao, "cell 0 6");
-
-		chckbxConfusoDesorientado = new JCheckBox("Confuso/Desorientado");
-		chckbxConfusoDesorientado.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(chckbxConfusoDesorientado, "cell 0 6");
-
-		chckbxTempC2 = new JCheckBox("Temperatural Corporal >38");
-		chckbxTempC2.setEnabled(false);
-		add(chckbxTempC2, "cell 0 10");
-
-		chckbxOximetria = new JCheckBox("Oximetria do pulso <90%");
-		chckbxOximetria.setEnabled(false);
-		add(chckbxOximetria, "cell 0 12");
-
-		chckbxFluxoResp = new JCheckBox("Fluxo Respirat\u00F3rio < 200");
-		chckbxFluxoResp.setEnabled(false);
-		add(chckbxFluxoResp, "cell 0 13");
-
-		btnPrioridade = new JButton("Calcular Prioridade");
-		btnPrioridade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(btnPrioridade, "cell 0 14");
+		
+				chckbxConfusoDesorientado = new JCheckBox("Confuso/Desorientado");
+				chckbxConfusoDesorientado.setBackground(new Color(255, 255, 255));
+				panel.add(chckbxConfusoDesorientado, "cell 0 2");
+				chckbxConfusoDesorientado.setFont(new Font("Tahoma", Font.PLAIN, 14));
+						
+								chckbxOutrosP = new JCheckBox("Outros procedimentos");
+								panel.add(chckbxOutrosP, "cell 1 2");
+								chckbxOutrosP.setBackground(new Color(255, 255, 255));
+								chckbxOutrosP.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				
+						chckbxSemReacao = new JCheckBox("Sem rea\u00E7\u00E3o");
+						chckbxSemReacao.setBackground(new Color(255, 255, 255));
+						panel.add(chckbxSemReacao, "cell 2 2");
+						chckbxSemReacao.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+				chckbxProcedimentos = new JCheckBox(
+						"M\u00FAltiplos atendimentos (raio x, exames laboratoriais, inje\u00E7\u00F5es) ");
+				chckbxProcedimentos.setBackground(new Color(255, 255, 255));
+				panel.add(chckbxProcedimentos, "cell 0 3 3 1");
+				chckbxProcedimentos.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				chckbxProcedimentos.setActionCommand("Procedimentos");
 		
 		lblNomePaciente = new JLabel("");
 		lblNomePaciente.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(lblNomePaciente, "cell 0 1");
+		add(lblNomePaciente, "flowx,cell 0 3");
+		
+		panel_1 = new JPanel();
+		panel_1.setBackground(new Color(255, 255, 255));
+		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		add(panel_1, "cell 0 5,grow");
+		panel_1.setLayout(new MigLayout("", "[][][]", "[][][]"));
+		
+				chckbxFreqC = new JCheckBox("Frequ\u00EAncia Card\u00EDaca > 90");
+				chckbxFreqC.setBackground(new Color(255, 255, 255));
+				panel_1.add(chckbxFreqC, "flowx,cell 0 0,alignx left");
+				chckbxFreqC.setEnabled(false);
+				chckbxFreqC.setFont(new Font("Tahoma", Font.PLAIN, 12));
+								
+										chckbxTempC2 = new JCheckBox("Temperatural Corporal >38");
+										chckbxTempC2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+										chckbxTempC2.setBackground(new Color(255, 255, 255));
+										panel_1.add(chckbxTempC2, "cell 1 0,growx");
+										chckbxTempC2.setEnabled(false);
+						
+								chckbxFreqR = new JCheckBox("Frequ\u00EAncia Respirat\u00F3rio > 20");
+								chckbxFreqR.setBackground(new Color(255, 255, 255));
+								panel_1.add(chckbxFreqR, "flowx,cell 0 1");
+								chckbxFreqR.setEnabled(false);
+								chckbxFreqR.setFont(new Font("Tahoma", Font.PLAIN, 12));
+												
+														chckbxOximetria = new JCheckBox("Oximetria do pulso <90%");
+														chckbxOximetria.setFont(new Font("Tahoma", Font.PLAIN, 12));
+														chckbxOximetria.setBackground(new Color(255, 255, 255));
+														panel_1.add(chckbxOximetria, "cell 1 1");
+														chckbxOximetria.setEnabled(false);
+										
+												chckbxTempC = new JCheckBox("Temperatura Corporal < 36 ");
+												chckbxTempC.setBackground(new Color(255, 255, 255));
+												panel_1.add(chckbxTempC, "flowx,cell 0 2");
+												chckbxTempC.setEnabled(false);
+												chckbxTempC.setFont(new Font("Tahoma", Font.PLAIN, 12));
+																
+																		chckbxFluxoResp = new JCheckBox("Fluxo Respirat\u00F3rio < 200");
+																		chckbxFluxoResp.setFont(new Font("Tahoma", Font.PLAIN, 12));
+																		chckbxFluxoResp.setBackground(new Color(255, 255, 255));
+																		panel_1.add(chckbxFluxoResp, "cell 1 2");
+																		chckbxFluxoResp.setEnabled(false);
 		
 		lblPrioridadeDoPaciente = new JLabel("Prioridade do paciente: ");
-		lblPrioridadeDoPaciente.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		add(lblPrioridadeDoPaciente, "flowx,cell 0 19");
+		lblPrioridadeDoPaciente.setForeground(new Color(0, 0, 0));
+		lblPrioridadeDoPaciente.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		add(lblPrioridadeDoPaciente, "flowx,cell 0 8");
 		
 		lblPrioridade = new JLabel("");
-		lblPrioridade.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		add(lblPrioridade, "cell 0 19");
-		
-		btnLimpar = new JButton("Limpar");
-		btnLimpar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(btnLimpar, "flowx,cell 0 21,alignx right");
+		lblPrioridade.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		add(lblPrioridade, "cell 0 8");
 		
 		btnVoltar = new JButton("Voltar");
 		btnVoltar.setHorizontalAlignment(SwingConstants.LEFT);
 		btnVoltar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(btnVoltar, "cell 0 21,alignx right");
+		add(btnVoltar, "flowx,cell 0 9,alignx right");
+		
+		btnLimpar = new JButton("Limpar");
+		btnLimpar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		add(btnLimpar, "cell 0 9,alignx left");
+		
+				btnPrioridade = new JButton("Calcular Prioridade");
+				btnPrioridade.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				add(btnPrioridade, "cell 0 7,alignx center");
+				
+				lblFotoTriagem = new JLabel("");
+				lblFotoTriagem.setIcon(new ImageIcon(TelaTriagem.class.getResource("/img/medico.png")));
+				add(lblFotoTriagem, "cell 0 0,alignx center");
 		
 	}
 
