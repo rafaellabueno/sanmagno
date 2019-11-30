@@ -128,4 +128,10 @@ public class ListaPaciente {
 		this.filaA = filaA;
 	}	
 	
+	public No primeiro ()
+	{
+		return primeiro; 
+	}
+	
+	
 }

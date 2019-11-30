@@ -22,7 +22,7 @@ public class JanelaPrincipal extends JFrame {
 	/**
 	 * 
 	 */
-	//Declaração de telas e componentes da tela
+	// Declaração de telas e componentes da tela
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private TelaCadastro tCad;
@@ -33,7 +33,7 @@ public class JanelaPrincipal extends JFrame {
 	private TelaTriagem tTriagem;
 	private TelaProxPac tProxPac;
 	private TelaListaAtendEncer tListEnce;
-	private TelaAtendEncer tAtendEnc; 
+	private TelaAtendEncer tAtendEnc;
 	private JMenuItem menuCadastro;
 	private JMenuItem menuConsulta;
 	private JMenuItem mntmPainelDeSenhas;
@@ -41,7 +41,11 @@ public class JanelaPrincipal extends JFrame {
 	private JMenuItem mntmListEnce;
 	private JMenuItem mntmFilaPrioridade;
 	private JMenuItem mntmProxAtend;
-	private JMenuItem mntmGerarRelatorio;
+	private JMenuItem mntmGerarRelatorioPac;
+	private JMenuItem mntmGerarRelatorioAtend;
+	private JMenuItem mntmGerarRelatorioTME;
+	private JMenuItem mntmGerarRelatorioTMAP;
+	private JMenuItem mntmGerarRelatorioTMAG;
 	private JLabel lblFotoLogo;
 	private JPanel panel;
 
@@ -74,7 +78,7 @@ public class JanelaPrincipal extends JFrame {
 		mntmPainelDeSenhas = new JMenuItem("Painel de Senhas");
 		mntmPainelDeSenhas.setActionCommand("menuSenha");
 		mnAtendimento.add(mntmPainelDeSenhas);
-		
+
 		mntmListEnce = new JMenuItem("Lista de Atendimentos Encerrados");
 		mntmListEnce.setActionCommand("menuListEnce");
 		mnAtendimento.add(mntmListEnce);
@@ -89,13 +93,29 @@ public class JanelaPrincipal extends JFrame {
 		mntmProxAtend = new JMenuItem("Próximo Atendimento");
 		mntmProxAtend.setActionCommand("menuProx");
 		mnPrioridade.add(mntmProxAtend);
-		
+
 		JMenu mnRelatorios = new JMenu("Relatórios");
 		menuBar.add(mnRelatorios);
 
-		mntmGerarRelatorio = new JMenuItem("Gerar Relatórios");
-		mntmGerarRelatorio.setActionCommand("menuRelatorio");
-		mnRelatorios.add(mntmGerarRelatorio);
+		mntmGerarRelatorioPac = new JMenuItem("Gerar Relatórios do Paciente");
+		mntmGerarRelatorioPac.setActionCommand("menuRelatorioPac");
+		mnRelatorios.add(mntmGerarRelatorioPac);
+
+		mntmGerarRelatorioAtend = new JMenuItem("Gerar Relatórios de Atendimento");
+		mntmGerarRelatorioAtend.setActionCommand("menuRelatorioAtend");
+		mnRelatorios.add(mntmGerarRelatorioAtend);
+
+		mntmGerarRelatorioTME = new JMenuItem("Gerar Relatórios de Tempo Médio de Espera ");
+		mntmGerarRelatorioAtend.setActionCommand("menuRelatorioTME");
+		mnRelatorios.add(mntmGerarRelatorioTME);
+
+		mntmGerarRelatorioTMAP = new JMenuItem("Gerar Relatórios de Tempo Médio de Atendimento (por prioridade)");
+		mntmGerarRelatorioAtend.setActionCommand("menuRelatorioTMAP");
+		mnRelatorios.add(mntmGerarRelatorioTMAP);
+
+		mntmGerarRelatorioTMAG = new JMenuItem("Gerar Relatórios de Tempo Médio de Atendimento (geral)");
+		mntmGerarRelatorioAtend.setActionCommand("menuRelatorioTMAG");
+		mnRelatorios.add(mntmGerarRelatorioTMAG);
 
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(102, 205, 170));
@@ -108,16 +128,15 @@ public class JanelaPrincipal extends JFrame {
 				"Respons\u00E1veis: Guilherme Menezes, Rafaella Bueno e Vit\u00F3ria Teixeira");
 		labelpessoas.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		contentPane.add(labelpessoas, "cell 0 0,grow");
-		
+
 		panel = new JPanel();
 		panel.setBackground(new Color(102, 205, 170));
 		add(panel, "cell 0 1 0 0,grow");
-				
-		lblFotoLogo = new JLabel(new ImageIcon(TelaConsulta.class.getResource("/img/logo.png")));				
+
+		lblFotoLogo = new JLabel(new ImageIcon(TelaConsulta.class.getResource("/img/logo.png")));
 		lblFotoLogo.setText("");
 		lblFotoLogo.setSize(20, 20);
 		panel.add(lblFotoLogo, "cell 0 0,alignx center");
-	
 
 		tCad = new TelaCadastro();
 		tConfirma = new TelaConfirmacao();
@@ -126,11 +145,11 @@ public class JanelaPrincipal extends JFrame {
 		tTriagem = new TelaTriagem();
 		tPri = new TelaFilasDePrioridades();
 		tProxPac = new TelaProxPac();
-        tAtendEnc = new TelaAtendEncer(); 
-        tListEnce = new TelaListaAtendEncer();
+		tAtendEnc = new TelaAtendEncer();
+		tListEnce = new TelaListaAtendEncer();
 	}
 
-	//getters e setters das telas e componentes
+	// getters e setters das telas e componentes
 	public TelaCadastro getTcad() {
 		return tCad;
 	}
@@ -262,5 +281,45 @@ public class JanelaPrincipal extends JFrame {
 	public void setTListEnce(TelaListaAtendEncer tListEnce) {
 		this.tListEnce = tListEnce;
 	}
-	
+
+	public JMenuItem getMntmGerarRelatorioPac() {
+		return mntmGerarRelatorioPac;
+	}
+
+	public void setMntmGerarRelatorioPac(JMenuItem mntmGerarRelatorioPac) {
+		this.mntmGerarRelatorioPac = mntmGerarRelatorioPac;
+	}
+
+	public JMenuItem getMntmGerarRelatorioAtend() {
+		return mntmGerarRelatorioAtend;
+	}
+
+	public void setMntmGerarRelatorioAtend(JMenuItem mntmGerarRelatorioAtend) {
+		this.mntmGerarRelatorioAtend = mntmGerarRelatorioAtend;
+	}
+
+	public JMenuItem getMntmGerarRelatorioTME() {
+		return mntmGerarRelatorioTME;
+	}
+
+	public void setMntmGerarRelatorioTME(JMenuItem mntmGerarRelatorioTME) {
+		this.mntmGerarRelatorioTME = mntmGerarRelatorioTME;
+	}
+
+	public JMenuItem getMntmGerarRelatorioTMAP() {
+		return mntmGerarRelatorioTMAP;
+	}
+
+	public void setMntmGerarRelatorioTMAP(JMenuItem mntmGerarRelatorioTMAP) {
+		this.mntmGerarRelatorioTMAP = mntmGerarRelatorioTMAP;
+	}
+
+	public JMenuItem getMntmGerarRelatorioTMAG() {
+		return mntmGerarRelatorioTMAG;
+	}
+
+	public void setMntmGerarRelatorioTMAG(JMenuItem mntmGerarRelatorioTMAG) {
+		this.mntmGerarRelatorioTMAG = mntmGerarRelatorioTMAG;
+	}
+
 }

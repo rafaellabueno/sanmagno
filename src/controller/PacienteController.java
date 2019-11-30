@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import dao.PacienteDAO;
 import model.ListaPaciente;
 import model.Paciente;
 import visao.JanelaPrincipal;
@@ -22,6 +23,7 @@ public class PacienteController implements ActionListener{
 		this.jan.getTcad().getBtnCadastrar().addActionListener(this);
 		this.jan.getTcon().getBtnPesquisar().addActionListener(this);
 		this.jan.getTcon().getBtnGerarSenha().addActionListener(this);
+		this.jan.getMntmGerarRelatorioPac().addActionListener(this);
 		
 		listaPac = new ListaPaciente();
 	}
@@ -89,6 +91,15 @@ public class PacienteController implements ActionListener{
 			this.jan.getTcon().getTextCPF().setText("");
 			this.jan.getTcon().getLblPaciente().setText("");
 			this.jan.getTcon().getLblSenha().setText("");		
+		}
+		
+		
+		//gera relatório
+		if(e.getActionCommand().equals("menuRelatorioPac"))
+		{
+			PacienteDAO pdao = new PacienteDAO(); 
+			pdao.relatorioPaciente(this.listaPac); 
+		
 		}
 
 		

@@ -65,4 +65,5 @@ public class FilaAtendimento {
 	public void esvaziar() {
 		this.topo = null;
 	}
+	
 }

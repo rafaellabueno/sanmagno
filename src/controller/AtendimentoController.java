@@ -5,7 +5,12 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Vector;
 
+import dao.AtendimentoDAO;
+import dao.TempoAtendGeralDAO;
+import dao.TempoAtendPriDAO;
+import dao.TempoEsperaDAO;
 import model.Atendimento;
+import model.FilaAtendimento;
 import model.FilaPrioridade;
 import model.ListaAtendimentosEncerrados;
 import model.ListaPaciente;
@@ -22,71 +27,78 @@ public class AtendimentoController implements ActionListener {
 	private Paciente pac;
 	private Paciente pLista;
 	private PacienteController pCon;
-	
+
 	private Atendimento proxAtendimento;
 	private FilaPrioridade filaP1;
 	private FilaPrioridade filaP2;
 	private FilaPrioridade filaP3;
 	private FilaPrioridade filaP4;
 	private FilaPrioridade filaP5;
+	private FilaAtendimento filaAtend;
 	private ListaAtendimentosEncerrados listaAtenEnc;
 
 	public AtendimentoController(JanelaPrincipal jan, Paciente pac) {
 		super();
 		this.jan = jan;
 		this.pac = pac;
-		//Botão para limpar tela de cadastro
+		// Botão para limpar tela de cadastro
 		this.jan.getTcad().getBtnLimpar().addActionListener(this);
-		
-		//Volta para o menu na confirmação de cadastro
+
+		// Volta para o menu na confirmação de cadastro
 		this.jan.getTconfirma().getBtnMenu().addActionListener(this);
-		
-		//Botões de voltar para a tela principal e de limpar dados na tela de consulta
+
+		// Botões de voltar para a tela principal e de limpar dados na tela de consulta
 		this.jan.getTcon().getBtnVoltar().addActionListener(this);
 		this.jan.getTcon().getBtnLimpar().addActionListener(this);
-		
-		//Menu item para mudança de telas
+
+		// Menu item para mudança de telas
 		this.jan.getMntmPainelDeSenhas().addActionListener(this);
 		this.jan.getMntmProxAtend().addActionListener(this);
 		this.jan.getMntmFilaPrioridade().addActionListener(this);
 		this.jan.getMntmListEnce().addActionListener(this);
-		
-		//Vai para a tela de triagem a partir do painel de senhas
+
+		// Vai para a tela de triagem a partir do painel de senhas
 		this.jan.getTsenha().getBtnTriagem().addActionListener(this);
-		
-		//Pesquisa os pacientes na fila de prioridade selecionada
+
+		// Pesquisa os pacientes na fila de prioridade selecionada
 		this.jan.getTfpri().getBtnPesquisarPrioridade().addActionListener(this);
-		
-		//Ações relacionados a tela de triagem
+
+		// Ações relacionados a tela de triagem
 		this.jan.getTtriagem().getBtnPrioridade().addActionListener(this);
 		this.jan.getTtriagem().getChckbxProcedimentos().addActionListener(this);
 		this.jan.getTtriagem().getBtnVoltar().addActionListener(this);
 		this.jan.getTtriagem().getBtnLimpar().addActionListener(this);
-		
-		//Botão para ir para a tela de atendimentos encerrados
+
+		// Botão para ir para a tela de atendimentos encerrados
 		this.jan.getTproxpac().getBtnEncerrarAtendimento().addActionListener(this);
-		
-		//Ações relacionados a tela de atendimentos encerrados
+
+		// Ações relacionados a tela de atendimentos encerrados
 		this.jan.getTatendenc().getBtnLimpar().addActionListener(this);
 		this.jan.getTatendenc().getBtnVoltar().addActionListener(this);
 		this.jan.getTatendenc().getBtnAtualizar().addActionListener(this);
 		this.jan.getTatendenc().getBtnPesquisarCpf().addActionListener(this);
 
-		//instanciando as filas de prioridades
+		// Ações relacionadas aos JMenuItem de gerar relatório
+		this.jan.getMntmGerarRelatorioAtend().addActionListener(this);
+		filaAtend = new FilaAtendimento(); 
+		this.jan.getMntmGerarRelatorioTME().addActionListener(this);
+		this.jan.getMntmGerarRelatorioTMAG().addActionListener(this);
+		this.jan.getMntmGerarRelatorioTMAP().addActionListener(this);
+
+		// instanciando as filas de prioridades
 		filaP1 = new FilaPrioridade();
 		filaP2 = new FilaPrioridade();
 		filaP3 = new FilaPrioridade();
 		filaP4 = new FilaPrioridade();
 		filaP5 = new FilaPrioridade();
-		
-		
+
 		pCon = new PacienteController(jan, pac);
 		listaAtenEnc = new ListaAtendimentosEncerrados();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		//Limpa os campos da tela
+		// Limpa os campos da tela
 		if (arg0.getActionCommand().equals("Limpar")) {
 			this.jan.getTcon().getTextCPF().setText("");
 			this.jan.getTcad().getTextNome().setText("");
@@ -119,14 +131,14 @@ public class AtendimentoController implements ActionListener {
 
 		}
 
-		//Botão para voltar para a janela principal
+		// Botão para voltar para a janela principal
 		if (arg0.getActionCommand().equals("Voltar")) {
 			this.jan.setContentPane(this.jan.getjPrinc());
 			this.jan.revalidate();
 			this.jan.repaint();
 		}
 
-		//Próxima senha a ser chamada para atendimento
+		// Próxima senha a ser chamada para atendimento
 		if (arg0.getActionCommand().equals("menuSenha")) {
 			try {
 				this.jan.setContentPane(this.jan.getTsenha());
@@ -140,10 +152,9 @@ public class AtendimentoController implements ActionListener {
 				this.jan.getTsenha().getLblSenhaPainel().setText(String.valueOf(proxAtendimento.getSenha()));
 				this.jan.getTsenha().getLblNomePainel().setText(String.valueOf(proxAtendimento.getPac().getNome()));
 				this.jan.getTsenha().getLblCpfPainel().setText(proxAtendimento.getPac().getCpf());
-				if(this.jan.getTsenha().getLblSenhaPainel().equals("")) {
+				if (this.jan.getTsenha().getLblSenhaPainel().equals("")) {
 					this.jan.getTsenha().botaoTriagemDesabilitar();
-				}
-				else {
+				} else {
 					this.jan.getTsenha().botaoTriagem();
 				}
 			} catch (Exception e) {
@@ -152,7 +163,7 @@ public class AtendimentoController implements ActionListener {
 			}
 		}
 
-		//Tela de triagem
+		// Tela de triagem
 		if (arg0.getActionCommand().equals("Triagem")) {
 			this.jan.setContentPane(this.jan.getTtriagem());
 			this.jan.revalidate();
@@ -178,7 +189,7 @@ public class AtendimentoController implements ActionListener {
 
 		}
 
-		//Calcula a prioridade do atendimento a partir dos campos marcados na tela
+		// Calcula a prioridade do atendimento a partir dos campos marcados na tela
 		if (arg0.getActionCommand().equals("Calcular Prioridade")) {
 			int fila = 0;
 
@@ -241,8 +252,8 @@ public class AtendimentoController implements ActionListener {
 			this.jan.getTtriagem().getLblPrioridade().setText(String.valueOf(fila));
 		}
 
-		
-		//Ativa ou desativa ckeckboxes relacionadas com o campo de múltiplos procedimentos
+		// Ativa ou desativa ckeckboxes relacionadas com o campo de múltiplos
+		// procedimentos
 		if (arg0.getActionCommand().equals("Procedimentos")) {
 			if (this.jan.getTtriagem().getChckbxProcedimentos().isSelected()) {
 				this.jan.getTtriagem().checkAtivado();
@@ -250,29 +261,26 @@ public class AtendimentoController implements ActionListener {
 				this.jan.getTtriagem().checkDesativado();
 			}
 		}
-		
-		
 
-		//Tela de prioridades
-	
+		// Tela de prioridades
+
 		if (arg0.getActionCommand().equals("menuPrioridade")) {
 			this.jan.setContentPane(this.jan.getTfpri());
 			this.jan.revalidate();
-			//this.jan.revalidate();
+			// this.jan.revalidate();
 			this.jan.repaint();
-			Vector vector = new Vector(); 
-			vector.add(null); 
+			Vector vector = new Vector();
+			vector.add(null);
 			this.jan.getTfpri().adicionaItem(vector);
-		
-			
+
 		}
 
-		//Pesquisa os pacientes em seu atendimento que estão na prioridade selecionada
+		// Pesquisa os pacientes em seu atendimento que estão na prioridade selecionada
 		if (arg0.getActionCommand().equals("Pesquisar Prioridade")) {
 			String prioridade = (String) (this.jan.getTfpri().getComboPrioridade().getSelectedItem());
 			Vector vector = new Vector();
 			switch (prioridade) {
-		
+
 			case "Prioridade 1":
 				for (NoFila aux = filaP1.topo(); aux != null; aux = aux.getProximo()) {
 					vector.add(aux.getAtendimento().getPac().getNome());
@@ -306,7 +314,7 @@ public class AtendimentoController implements ActionListener {
 			}
 		}
 
-		//Tela para próximo atendimento a ser chamado de acordo com as prioridades
+		// Tela para próximo atendimento a ser chamado de acordo com as prioridades
 		if (arg0.getActionCommand().equals("menuProx")) {
 			this.jan.setContentPane(this.jan.getTproxpac());
 			this.jan.revalidate();
@@ -351,8 +359,7 @@ public class AtendimentoController implements ActionListener {
 								NoFila ateEnc = filaP5.desempilhar();
 								listaAtenEnc.adicionar(ateEnc.getAtendimento());
 								this.jan.getTproxpac().botaoEAten();
-							}
-							else {
+							} else {
 								this.jan.getTproxpac().getLblAviso().setText("Não há pacientes para chamada");
 								this.jan.getTproxpac().botaoEAtenDesabilitar();
 							}
@@ -362,7 +369,7 @@ public class AtendimentoController implements ActionListener {
 			}
 		}
 
-		//Tela de atendimentos encerrados
+		// Tela de atendimentos encerrados
 		if (arg0.getActionCommand().equals("Encerrar Atendimento")) {
 			this.jan.setContentPane(this.jan.getTatendenc());
 			this.jan.revalidate();
@@ -370,9 +377,11 @@ public class AtendimentoController implements ActionListener {
 			this.jan.getTatendenc().getTextCpf().setText("");
 			this.jan.getTatendenc().getTextDataS().setText("");
 			this.jan.getTatendenc().getTextHorasS().setText("");
+			this.jan.getTatendenc().getLblNome().setText("");
+			this.jan.getTatendenc().getLblAviso().setText("");
 		}
-		
-		//Tela da lista de atendimentos encerrados
+
+		// Tela da lista de atendimentos encerrados
 		if (arg0.getActionCommand().equals("menuListEnce")) {
 			Vector vector1 = new Vector();
 			Vector vector2 = new Vector();
@@ -387,7 +396,7 @@ public class AtendimentoController implements ActionListener {
 			this.jan.getTListEnce().adicionaItemData(vector2);
 		}
 
-		//Pesquisa CPF do paciente para atualizar atendimento
+		// Pesquisa CPF do paciente para atualizar atendimento
 		if (arg0.getActionCommand().equals("Pesquisar CPF")) {
 			try {
 				String cpf = (this.jan.getTatendenc().getTextCpf().getText());
@@ -400,22 +409,50 @@ public class AtendimentoController implements ActionListener {
 			}
 		}
 
-		//Atualiza os dados do atendimento
+		// Atualiza os dados do atendimento
 		if (arg0.getActionCommand().equals("Atualizar")) {
 			try {
 				String cpf = (this.jan.getTatendenc().getTextCpf().getText());
 				Atendimento atAtual = listaAtenEnc.buscar(cpf).getAtendimento();
 				atAtual.setDataS(this.jan.getTatendenc().getTextDataS().getText());
 				atAtual.setHoraS(this.jan.getTatendenc().getTextHorasS().getText());
-				
-				//18:21:12
+
+				// 18:21:12
 				String hora = this.jan.getTatendenc().getTextHorasS().getText();
-				
+
 			} catch (Exception e) {
 				this.jan.getTatendenc().getLblAviso().setText("Campos com valores inadequados");
 			}
 		}
-
+		//gera relatório
+		if(arg0.getActionCommand().equals("menuRelatorioAtend"))
+		{
+			AtendimentoDAO atendDao = new AtendimentoDAO(); 
+			atendDao.relatorioAtendimento(this.filaAtend);
+		}
+		
+		//gera relatório
+		//if(arg0.getActionCommand().equals("menuRelatorioTME"))
+		//{
+			//TempoEsperaDAO teDAO = new TempoEsperaDAO(); 
+			//teDAO.tempoEspera();
+		//}
+		
+		//gera relatório
+		//if(arg0.getActionCommand().equals("menuRelatorioTMAP"))
+		//{
+			//TempoAtendPriDAO tapDAO = new TempoAtendPriDAO(); 
+			//tapDAO.tempoAtendPri(); 
+			
+		//}
+		
+		//gera relatório
+		//if(arg0.getActionCommand().equals("menuRelatorioTMAG"))
+		//{
+			//TempoAtendGeralDAO tagDAO = new TempoAtendGeralDAO(); 
+			//tagDAO.tempoAtendGeral();
+		//}
+		
 	}
 
 }
