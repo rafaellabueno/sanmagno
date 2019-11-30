@@ -311,17 +311,22 @@ public class AtendimentoController implements ActionListener {
 			this.jan.setContentPane(this.jan.getTproxpac());
 			this.jan.revalidate();
 			this.jan.repaint();
+			this.jan.getTproxpac().getLblNomeProx().setText("");
+			this.jan.getTproxpac().getLblPrioridadeProx().setText("");
+			this.jan.getTproxpac().getLblAviso().setText("");
 			if (filaP1.estaVazia() == false) {
 				this.jan.getTproxpac().getLblNomeProx().setText(filaP1.topo().getAtendimento().getPac().getNome());
 				this.jan.getTproxpac().getLblPrioridadeProx().setText(String.valueOf(1));
 				NoFila ateEnc = filaP1.desempilhar();
 				listaAtenEnc.adicionar(ateEnc.getAtendimento());
+				this.jan.getTproxpac().botaoEAten();
 			} else {
 				if (filaP2.estaVazia() == false) {
 					this.jan.getTproxpac().getLblNomeProx().setText(filaP2.topo().getAtendimento().getPac().getNome());
 					this.jan.getTproxpac().getLblPrioridadeProx().setText(String.valueOf(2));
 					NoFila ateEnc = filaP2.desempilhar();
 					listaAtenEnc.adicionar(ateEnc.getAtendimento());
+					this.jan.getTproxpac().botaoEAten();
 				} else {
 					if (filaP3.estaVazia() == false) {
 						this.jan.getTproxpac().getLblNomeProx()
@@ -329,6 +334,7 @@ public class AtendimentoController implements ActionListener {
 						this.jan.getTproxpac().getLblPrioridadeProx().setText(String.valueOf(3));
 						NoFila ateEnc = filaP3.desempilhar();
 						listaAtenEnc.adicionar(ateEnc.getAtendimento());
+						this.jan.getTproxpac().botaoEAten();
 					} else {
 						if (filaP4.estaVazia() == false) {
 							this.jan.getTproxpac().getLblNomeProx()
@@ -336,6 +342,7 @@ public class AtendimentoController implements ActionListener {
 							this.jan.getTproxpac().getLblPrioridadeProx().setText(String.valueOf(4));
 							NoFila ateEnc = filaP4.desempilhar();
 							listaAtenEnc.adicionar(ateEnc.getAtendimento());
+							this.jan.getTproxpac().botaoEAten();
 						} else {
 							if (filaP5.estaVazia() == false) {
 								this.jan.getTproxpac().getLblNomeProx()
@@ -343,6 +350,11 @@ public class AtendimentoController implements ActionListener {
 								this.jan.getTproxpac().getLblPrioridadeProx().setText(String.valueOf(5));
 								NoFila ateEnc = filaP5.desempilhar();
 								listaAtenEnc.adicionar(ateEnc.getAtendimento());
+								this.jan.getTproxpac().botaoEAten();
+							}
+							else {
+								this.jan.getTproxpac().getLblAviso().setText("Não há pacientes para chamada");
+								this.jan.getTproxpac().botaoEAtenDesabilitar();
 							}
 						}
 					}

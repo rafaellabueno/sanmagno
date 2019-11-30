@@ -59,10 +59,12 @@ public class TelaFilasDePrioridades extends JPanel {
 		listModel = new DefaultListModel();
 		list = new JList(listModel);
 		list.setToolTipText("");
-		add(list, "flowx,cell 0 5 4 2,grow");
 		
-		scrollbar = new Scrollbar();
-		add(scrollbar, "cell 2 5 2 1,grow");
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setViewportView(list);
+		list.setLayoutOrientation(JList.VERTICAL);
+		
+		add(scrollPane, "flowx,cell 0 5 4 2,growx,aligny center");
 	}
 	
 	//getters e setters dos componentes da tela

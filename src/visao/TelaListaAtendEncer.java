@@ -11,6 +11,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JFormattedTextField;
@@ -42,11 +43,17 @@ public class TelaListaAtendEncer extends JPanel {
 		
 		listModelNome = new DefaultListModel();
 		listNome = new JList(listModelNome);
-		add(listNome, "cell 1 4 5 5,grow");
+		JScrollPane scrollPane1 = new JScrollPane();
+		scrollPane1.setViewportView(listNome);
+		listNome.setLayoutOrientation(JList.VERTICAL);
+		add(scrollPane1, "cell 1 4 5 5,grow");
 		
 		listModelData = new DefaultListModel();
 		listData = new JList(listModelData);
-		add(listData, "cell 6 4 1 5,grow");
+		JScrollPane scrollPane2 = new JScrollPane();
+		scrollPane2.setViewportView(listData);
+		listData.setLayoutOrientation(JList.VERTICAL);
+		add(scrollPane2, "cell 6 4 1 5,grow");
 	}
 
 	//getters e setters dos componentes da tela
