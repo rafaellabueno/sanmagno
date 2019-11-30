@@ -8,10 +8,14 @@ import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
+import java.awt.FlowLayout;
+import javax.swing.ImageIcon;
 
 public class TelaAtendEncer extends JPanel {
-	
-	//Declaração dos componentes da tela
+
+	// Declaração dos componentes da tela
 	private JTextField textCpf;
 	private JTextField textHorasS;
 	private JTextField textDataS;
@@ -21,70 +25,102 @@ public class TelaAtendEncer extends JPanel {
 	private JButton btnLimpar;
 	private JButton btnVoltar;
 	private JLabel lblAviso;
+	private JPanel panel;
+	private JPanel panel_1;
+	private JPanel panel_2;
+	private JLabel label;
 
 	/**
 	 * Create the panel.
 	 */
 	public TelaAtendEncer() {
-		setLayout(new MigLayout("", "[][]", "[][][][][][][][][][]"));
+		setBackground(new Color(255, 255, 255));
+		setLayout(new MigLayout("", "[grow][]", "[grow][grow][grow][][][][][]"));
 
-		JLabel lblAtendimentosEncerrados = new JLabel("Atendimentos Encerrados");
-		lblAtendimentosEncerrados.setForeground(new Color(0, 128, 128));
-		lblAtendimentosEncerrados.setFont(new Font("Tahoma", Font.BOLD, 25));
-		add(lblAtendimentosEncerrados, "cell 0 0");
+		panel = new JPanel();
+		panel.setBackground(new Color(102, 205, 170));
+		add(panel, "cell 0 0 2 1,grow");
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		panel_2 = new JPanel();
+		panel_2.setBackground(new Color(102, 205, 170));
+		panel.add(panel_2);
+		panel_2.setLayout(new MigLayout("", "[]", "[]"));
+				
+				label = new JLabel("");
+				label.setIcon(new ImageIcon(TelaAtendEncer.class.getResource("/img/pasta.png")));
+				label.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				panel_2.add(label, "cell 0 0,alignx center");
+				
+						JLabel lblAtendimentosEncerrados = new JLabel("Encerrar Atendimento");
+						panel.add(lblAtendimentosEncerrados);
+						lblAtendimentosEncerrados.setHorizontalAlignment(SwingConstants.CENTER);
+						lblAtendimentosEncerrados.setForeground(new Color(255, 255, 255));
+						lblAtendimentosEncerrados.setFont(new Font("Tahoma", Font.BOLD, 25));
+
+		panel_1 = new JPanel();
+		panel_1.setBorder(
+				new BevelBorder(BevelBorder.LOWERED, new Color(102, 205, 170), new Color(102, 205, 170), new Color(102, 205, 170), new Color(102, 205, 170)));
+		panel_1.setBackground(new Color(255, 255, 255));
+		add(panel_1, "cell 0 1 2 1,grow");
+		panel_1.setLayout(new MigLayout("", "[][][]", "[][][]"));
 
 		JLabel lblDigiteOCpf = new JLabel("Digite o CPF do Paciente");
+		panel_1.add(lblDigiteOCpf, "flowx,cell 0 0,alignx right");
 		lblDigiteOCpf.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(lblDigiteOCpf, "flowx,cell 0 2");
-
-		textCpf = new JTextField();
-		add(textCpf, "cell 0 2,growx");
-		textCpf.setColumns(10);
-
-		btnPesquisarCpf = new JButton("Pesquisar CPF");
-		btnPesquisarCpf.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(btnPesquisarCpf, "cell 1 2");
-
-		lblNome = new JLabel("");
-		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(lblNome, "cell 0 3");
-
-		JLabel lblHoraDeSada = new JLabel("Hora de Sa\u00EDda");
-		lblHoraDeSada.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(lblHoraDeSada, "flowx,cell 0 4");
-
-		textHorasS = new JTextField();
-		add(textHorasS, "cell 0 4");
-		textHorasS.setColumns(10);
-
-		JLabel lblDataDeSada = new JLabel("Data de Sa\u00EDda");
-		lblDataDeSada.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(lblDataDeSada, "flowx,cell 0 5");
-
-		textDataS = new JTextField();
-		add(textDataS, "cell 0 5");
-		textDataS.setColumns(10);
+				
+						textCpf = new JTextField();
+						panel_1.add(textCpf, "cell 1 0");
+						textCpf.setColumns(10);
+				
+						btnPesquisarCpf = new JButton("Pesquisar CPF");
+						panel_1.add(btnPesquisarCpf, "cell 2 0");
+						
+								btnPesquisarCpf.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
+				lblNome = new JLabel("");
+				panel_1.add(lblNome, "cell 0 1,alignx right");
+				lblNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+				JLabel lblDataDeSada = new JLabel("Data de Sa\u00EDda");
+				panel_1.add(lblDataDeSada, "flowx,cell 0 2,alignx right");
+				lblDataDeSada.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+				textDataS = new JTextField();
+				panel_1.add(textDataS, "cell 1 2");
+				textDataS.setColumns(10);
+				
+						JLabel lblHoraDeSada = new JLabel("Hora de Sa\u00EDda");
+						panel_1.add(lblHoraDeSada, "flowx,cell 0 3,alignx right");
+						lblHoraDeSada.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+				textHorasS = new JTextField();
+				panel_1.add(textHorasS, "cell 1 3");
+				textHorasS.setColumns(10);
+
 		lblAviso = new JLabel("");
 		lblAviso.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(lblAviso, "cell 0 7");
-		
-		btnLimpar = new JButton("Limpar");
-		btnLimpar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(btnLimpar, "flowx,cell 0 8");
-
-		btnAtualizar = new JButton("Atualizar");
-		btnAtualizar.setEnabled(false);
-		btnAtualizar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(btnAtualizar, "cell 0 8,alignx center");
-		
-		btnVoltar = new JButton("Voltar");
-		btnVoltar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		add(btnVoltar, "cell 0 9");
+		add(lblAviso, "cell 0 11");
+												
+														btnVoltar = new JButton("Voltar");
+														add(btnVoltar, "flowx,cell 0 5,alignx center");
+														
+																btnVoltar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+										
+												btnAtualizar = new JButton("Atualizar");
+												add(btnAtualizar, "cell 0 5");
+												
+														btnAtualizar.setEnabled(false);
+														btnAtualizar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+																		
+																				btnLimpar = new JButton("Limpar");
+																				add(btnLimpar, "cell 0 5,alignx center");
+																				
+																						btnLimpar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 	}
 
-	//getters e setters dos componentes da tela
+	// getters e setters dos componentes da tela
 	public JButton getBtnPesquisarCpf() {
 		return btnPesquisarCpf;
 	}
@@ -156,13 +192,14 @@ public class TelaAtendEncer extends JPanel {
 	public void setLblAviso(JLabel lblAviso) {
 		this.lblAviso = lblAviso;
 	}
-	
-	//torna o botão de atualizar visivel ao encontrar paciente com cpf informado
+
+	// torna o botão de atualizar visivel ao encontrar paciente com cpf informado
 	public void tornarBotaoVisivel() {
 		btnAtualizar.setEnabled(true);
 	}
-	
-	//torna o botão de atualizar invisivel quando não encontrar paciente com cpf informado
+
+	// torna o botão de atualizar invisivel quando não encontrar paciente com cpf
+	// informado
 	public void tornarBotaoInvisivel() {
 		btnAtualizar.setEnabled(false);
 	}

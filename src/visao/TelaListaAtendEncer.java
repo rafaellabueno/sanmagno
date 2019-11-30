@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JFormattedTextField;
+import javax.swing.border.BevelBorder;
 
 public class TelaListaAtendEncer extends JPanel {
 	
@@ -28,21 +29,28 @@ public class TelaListaAtendEncer extends JPanel {
 	 * Create the panel.
 	 */
 	public TelaListaAtendEncer() {
-		setLayout(new MigLayout("", "[][][][][][][]", "[][][][][][][][][]"));
+		setBackground(new Color(102, 205, 170));
+		setLayout(new MigLayout("", "[][]", "[][][][]"));
 
 		JLabel lblAtendEnc = new JLabel("Lista de Atendimentos Encerrados");
-		lblAtendEnc.setForeground(new Color(0, 128, 128));
+		lblAtendEnc.setBackground(new Color(255, 255, 255));
+		lblAtendEnc.setForeground(new Color(255, 255, 255));
 		lblAtendEnc.setFont(new Font("Tahoma", Font.BOLD, 25));
 		add(lblAtendEnc, "cell 0 0 7 1");
 		
 		JLabel lblNomeDoPaciente = new JLabel("Nome do Paciente:");
+		lblNomeDoPaciente.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNomeDoPaciente.setForeground(new Color(255, 255, 255));
 		add(lblNomeDoPaciente, "cell 1 3");
 		
 		JLabel lblDataDoEncerramento = new JLabel("Data:");
+		lblDataDoEncerramento.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblDataDoEncerramento.setForeground(new Color(255, 255, 255));
 		add(lblDataDoEncerramento, "cell 6 3");
 		
 		listModelNome = new DefaultListModel();
 		listNome = new JList(listModelNome);
+		listNome.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(46, 139, 87), new Color(46, 139, 87), new Color(46, 139, 87), new Color(46, 139, 87)));
 		JScrollPane scrollPane1 = new JScrollPane();
 		scrollPane1.setViewportView(listNome);
 		listNome.setLayoutOrientation(JList.VERTICAL);
@@ -50,6 +58,7 @@ public class TelaListaAtendEncer extends JPanel {
 		
 		listModelData = new DefaultListModel();
 		listData = new JList(listModelData);
+		listData.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(46, 139, 87), new Color(46, 139, 87), new Color(46, 139, 87), new Color(46, 139, 87)));
 		JScrollPane scrollPane2 = new JScrollPane();
 		scrollPane2.setViewportView(listData);
 		listData.setLayoutOrientation(JList.VERTICAL);
