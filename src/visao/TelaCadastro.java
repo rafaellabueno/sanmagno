@@ -59,6 +59,7 @@ public class TelaCadastro extends JPanel {
 		panel_3.add(label, "cell 0 0,alignx center");
 		
 		panel_1 = new JPanel();
+		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(102, 205, 170), new Color(102, 205, 170), new Color(102, 205, 170), new Color(102, 205, 170)));
 		panel_1.setBackground(new Color(255, 255, 255));
 		add(panel_1, "cell 0 1 10 4,alignx center,aligny center");
 		panel_1.setLayout(new MigLayout("", "[]", "[][][][][][][][]"));

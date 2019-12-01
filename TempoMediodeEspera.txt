@@ -1,1 +1,1 @@
-Tempo Médio de Espera é 000:00:08
+Tempo Médio de Espera é 000:11:21

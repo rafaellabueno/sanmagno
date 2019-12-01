@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import javax.swing.border.BevelBorder;
 
 public class PainelDeSenhas extends JPanel {
 	
@@ -31,7 +32,7 @@ public class PainelDeSenhas extends JPanel {
 	 */
 	public PainelDeSenhas() {
 		setBackground(new Color(255, 255, 255));
-		setLayout(new MigLayout("", "[97px][56px][283px][][][500px]", "[127px][][140px][][228px]"));
+		setLayout(new MigLayout("", "[500px]", "[127px][228px]"));
 		
 		panel = new JPanel();
 		panel.setBackground(new Color(102, 205, 170));
@@ -82,7 +83,7 @@ public class PainelDeSenhas extends JPanel {
 	    lblSenhaPainel = new JLabel("");
 	    lblSenhaPainel.setBackground(new Color(102, 205, 170));
 	    panel_1.add(lblSenhaPainel, "cell 1 0");
-	    lblSenhaPainel.setFont(new Font("Tahoma", Font.BOLD, 40));
+	    lblSenhaPainel.setFont(new Font("Tahoma", Font.BOLD, 45));
 	    
 	    JLabel lblNome = new JLabel("Nome");
 	    panel_1.add(lblNome, "cell 0 2");
