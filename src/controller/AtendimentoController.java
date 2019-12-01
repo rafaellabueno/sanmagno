@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 import java.util.Vector;
 
 import dao.AtendimentoDAO;
@@ -245,22 +246,27 @@ public class AtendimentoController implements ActionListener {
 			switch (fila) {
 			case 1:
 				filaP1.empilhar(proxAtendimento);
+				proxAtendimento.setPrioridade(1);
 				break;
 
 			case 2:
 				filaP2.empilhar(proxAtendimento);
+				proxAtendimento.setPrioridade(2);
 				break;
 
 			case 3:
 				filaP3.empilhar(proxAtendimento);
+				proxAtendimento.setPrioridade(3);
 				break;
 
 			case 4:
 				filaP4.empilhar(proxAtendimento);
+				proxAtendimento.setPrioridade(4);
 				break;
 
 			case 5:
 				filaP5.empilhar(proxAtendimento);
+				proxAtendimento.setPrioridade(5);
 				break;
 			}
 
@@ -429,8 +435,6 @@ public class AtendimentoController implements ActionListener {
 				atAtual.setHoraS(this.jan.getTatendenc().getTextHorasS().getText());
 				listaAtenConsulta.removerInicio(atAtual);
 				listaAtenEnc.adicionar(atAtual);
-				// 18:21:12
-				String hora = this.jan.getTatendenc().getTextHorasS().getText();
 
 			} catch (Exception e) {
 				this.jan.getTatendenc().getLblAviso().setText("Campos com valores inadequados");
@@ -469,18 +473,18 @@ public class AtendimentoController implements ActionListener {
 		{
 			long total1 = 0, total2 = 0, total3 = 0, total4 = 0, total5 = 0;
 			int cont1 = 0, cont2 = 0, cont3 = 0, cont4 = 0, cont5 = 0;
-			Date date1 = null;
 			for (NoAtendimento aux = listaAtenEnc.primeiro(); aux != null; aux = aux.getProximo()) {
-				String data = aux.getAtendimento().getHoraS();
-				 DateFormat tes = new SimpleDateFormat("HH:mm:ss");  
-				 try {
-					date1= tes.parse(data);
+				String data = aux.getAtendimento().getDataS()+" "+aux.getAtendimento().getHoraS();
+				Calendar cal = Calendar.getInstance();
+				DateFormat tes = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+				try {
+					cal.setTime(tes.parse(data));
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				long tS = date1.getTime();
-				long espera = tS - aux.getAtendimento().getDataC();
+				long d = cal.getTimeInMillis();
+				long espera = d - aux.getAtendimento().getDataC();
 				if(aux.getAtendimento().getPrioridade() == 1) {
 					total1 = total1 + espera;
 					cont1++;
@@ -530,23 +534,25 @@ public class AtendimentoController implements ActionListener {
 		if(arg0.getActionCommand().equals("menuRelatorioTMAG"))
 		{
 			long total = 0;
-			int cont = 0;
+			long cont = 0;
 			Date date1 = null;
 			for (NoAtendimento aux = listaAtenEnc.primeiro(); aux != null; aux = aux.getProximo()) {
-				String data = aux.getAtendimento().getHoraS();
-				 DateFormat tes = new SimpleDateFormat("HH:mm:ss");  
-				 try {
-					date1= tes.parse(data);
+				String data = aux.getAtendimento().getDataS()+" "+aux.getAtendimento().getHoraS();
+				Calendar cal = Calendar.getInstance();
+				DateFormat tes = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+				try {
+					cal.setTime(tes.parse(data));
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				long tS = date1.getTime();
-				long espera = tS - aux.getAtendimento().getDataC();
+				long d = cal.getTimeInMillis();
+				long espera = d - aux.getAtendimento().getDataC();
 				total = total + espera;
 				cont++;
 			}
 			total = total / cont;
+			System.out.println(total);
 			String tempo = String.format( "%03d:%02d:%02d", total / 3600000, ( total / 60000 ) % 60, ( total / 1000 ) % 60);
 			tagDAO.tempoAtendGeral(tempo);
 		}

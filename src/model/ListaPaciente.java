@@ -80,7 +80,6 @@ public class ListaPaciente {
 		No p = buscar(cpf);	
 		Calendar cal = Calendar.getInstance();
 		long d = cal.getTimeInMillis();
-		
 		this.senha++;
 		Atendimento a = new Atendimento(p.getPaciente(), d, this.senha);
 		filaA.empilhar(a);

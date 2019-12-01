@@ -13,7 +13,7 @@ public class TempoEsperaDAO {
 		FileWriter fw = null;
 		BufferedWriter bw = null;
 		try {
-			fw = new FileWriter("TempoMediodeEspera.txt", false);
+			fw = new FileWriter("TempoMediodeEspera.txt");
 			bw = new BufferedWriter(fw);
 
 			bw.write("Tempo Médio de Espera é "+ tempo);

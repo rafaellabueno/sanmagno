@@ -1,2 +1,1 @@
-Tempo Médio Atendimento Geralteste
-Tempo Médio Atendimento Geral: -437519:-7:-48teste
+Tempo Médio Atendimento Geral: 000:15:22

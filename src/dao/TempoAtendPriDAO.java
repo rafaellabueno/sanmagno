@@ -13,13 +13,17 @@ public class TempoAtendPriDAO {
 		BufferedWriter bw = null;
 
 		try {
-			fw = new FileWriter("tempoAtendimentoPrioridade.txt", false);
+			fw = new FileWriter("tempoAtendimentoPrioridade.txt");
 			bw = new BufferedWriter(fw);
 			bw.write("Tempo Médio Atendimento por Prioridade:");
 			bw.write("Prioridade 1: "+ tempo1);
+			bw.newLine();
 			bw.write("Prioridade 2: "+ tempo2);
+			bw.newLine();
 			bw.write("Prioridade 3: "+ tempo3);
+			bw.newLine();
 			bw.write("Prioridade 4: "+ tempo4);
+			bw.newLine();
 			bw.write("Prioridade 5: "+ tempo5);
 			bw.newLine();
 			bw.flush();

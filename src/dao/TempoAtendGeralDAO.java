@@ -14,7 +14,7 @@ public class TempoAtendGeralDAO {
 		BufferedWriter bw = null;
 
 		try {
-			fw = new FileWriter("tempoAtendimentoGeral.txt", true);
+			fw = new FileWriter("tempoAtendimentoGeral.txt");
 			bw = new BufferedWriter(fw);
 			bw.write("Tempo Médio Atendimento Geral: "+tempo);
 			bw.newLine();
