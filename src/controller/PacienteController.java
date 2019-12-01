@@ -21,7 +21,6 @@ public class PacienteController implements ActionListener{
 		this.jan.getMenuCadastro().addActionListener(this);
 		this.jan.getMenuConsulta().addActionListener(this);
 		this.jan.getTcad().getBtnCadastrar().addActionListener(this);
-		this.jan.getTcon().getBtnPesquisar().addActionListener(this);
 		this.jan.getTcon().getBtnGerarSenha().addActionListener(this);
 		this.jan.getMntmGerarRelatorioPac().addActionListener(this);
 		
@@ -51,36 +50,29 @@ public class PacienteController implements ActionListener{
 					this.jan.getTcad().getLblAviso().setText("Todos os campos devem ser preenchidos");
 				} else {
 					String cPFAux = (this.jan.getTcad().getTextCPF().getText());
-					int dataAux = Integer.parseInt(this.jan.getTcad().getTextData().getText());
-
-					Paciente pac = new Paciente(nomeAux, cPFAux, dataAux);
-					listaPac.adicionar(pac);
-					this.jan.setContentPane(this.jan.getTconfirma());
-					this.jan.revalidate();
-					this.jan.repaint();
+					if(listaPac.buscar(cPFAux) == null) {
+						int dataAux = Integer.parseInt(this.jan.getTcad().getTextData().getText());
+						Paciente pac = new Paciente(nomeAux, cPFAux, dataAux);
+						listaPac.adicionar(pac);
+						this.jan.setContentPane(this.jan.getTconfirma());
+						this.jan.revalidate();
+						this.jan.repaint();
+					}
+					else {
+						this.jan.getTcad().getLblAviso().setText("CPF já cadastrado");
+					}
 				}
 			} catch (NumberFormatException ex) {
 				this.jan.getTcad().getLblAviso().setText("Campos com valores inadequados");
 			}
 		}
 		
-		//Pesquisar paciente
-		if (e.getActionCommand().equals("Pesquisar")) {
-			try {
-				String cpf = (this.jan.getTcon().getTextCPF().getText());
-				pLista = listaPac.buscar(cpf).getPaciente();
-				this.jan.getTcon().getLblPaciente().setText(pLista.getNome());
-				this.jan.getTcon().botaoSenha();
-			} catch (Exception ex) {
-				this.jan.getTcon().getLblPaciente().setText("CPF não encontrado");
-				this.jan.getTcon().botaoSenhaDesabilitar();
-			}
-		}
-		
 		//Gerar a senha para os pacientes
 		if (e.getActionCommand().equals("Gerar Senha")) {
+			pLista = listaPac.buscar(this.jan.getTcon().getTextCPF().getText()).getPaciente();
 			int senha = listaPac.gerarSenha(pLista.getCpf());
 			this.jan.getTcon().getLblSenha().setText(String.valueOf(senha));
+			this.jan.getTcon().botaoSenhaDesabilitar();
 		}
 		
 		//Tela de consulta de pacientes
