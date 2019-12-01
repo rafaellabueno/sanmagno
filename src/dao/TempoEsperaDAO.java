@@ -9,14 +9,14 @@ public class TempoEsperaDAO {
 
 	}
 
-	public boolean tempoEspera() {
+	public boolean tempoEspera(String tempo) {
 		FileWriter fw = null;
 		BufferedWriter bw = null;
 		try {
-			fw = new FileWriter("TempoMediodeEspera.txt", true);
+			fw = new FileWriter("TempoMediodeEspera.txt", false);
 			bw = new BufferedWriter(fw);
 
-			bw.write("Tempo Médio de Espera");
+			bw.write("Tempo Médio de Espera é "+ tempo);
 			bw.newLine();
 			bw.flush();
 

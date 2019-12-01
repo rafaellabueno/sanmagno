@@ -99,7 +99,6 @@ public class PacienteController implements ActionListener{
 		{
 			PacienteDAO pdao = new PacienteDAO(); 
 			pdao.relatorioPaciente(this.listaPac); 
-		
 		}
 
 		

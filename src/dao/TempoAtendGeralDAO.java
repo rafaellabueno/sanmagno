@@ -9,15 +9,14 @@ public class TempoAtendGeralDAO {
 
 	}
 
-	public boolean tempoAtendGeral() {
+	public boolean tempoAtendGeral(String tempo) {
 		FileWriter fw = null;
 		BufferedWriter bw = null;
 
 		try {
 			fw = new FileWriter("tempoAtendimentoGeral.txt", true);
 			bw = new BufferedWriter(fw);
-			bw.write("Tempo Médio Atendimento Geral");
-			bw.write("teste");
+			bw.write("Tempo Médio Atendimento Geral: "+tempo);
 			bw.newLine();
 			bw.flush();
 		} catch (Exception e) {

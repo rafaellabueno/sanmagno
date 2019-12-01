@@ -77,11 +77,10 @@ public class ListaPaciente {
 	
 	//método para gerar a senha do paciente para ser chamado para a triagem
 	public int gerarSenha(String cpf) {
-		No p = buscar(cpf);
-		DateFormat data = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		No p = buscar(cpf);	
 		Calendar cal = Calendar.getInstance();
-		String d = data.format(cal.getTime());
-		//System.out.println(d);
+		long d = cal.getTimeInMillis();
+		
 		this.senha++;
 		Atendimento a = new Atendimento(p.getPaciente(), d, this.senha);
 		filaA.empilhar(a);

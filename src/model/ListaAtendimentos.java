@@ -1,13 +1,13 @@
 package model;
 
-//lista duplamente encadeada de atendimentos encerrados
-public class ListaAtendimentosEncerrados {
+//lista duplamente encadeada de atendimentos
+public class ListaAtendimentos {
 	//atributos da classe
 	private NoAtendimento primeiro;
 	private NoAtendimento ultimo;
 
 	//construtor da classe
-	public ListaAtendimentosEncerrados() {
+	public ListaAtendimentos() {
 		this.primeiro = null;
 		this.ultimo = null;
 	}
@@ -96,5 +96,24 @@ public class ListaAtendimentosEncerrados {
 	//método para retornar o primeiro da lista
 	public NoAtendimento primeiro() {
 		return this.primeiro;
+	}
+	
+	//remover
+	public void removerInicio(Atendimento ate) {
+		NoAtendimento aux = buscar(ate.getPac().getCpf());
+		if (aux != null) {
+			NoAtendimento anterior = aux.getAnterior();
+			NoAtendimento proximo = aux.getProximo();
+			
+			if (anterior != null) 
+				anterior.setProximo(proximo);
+			else 
+				this.primeiro = proximo;
+			
+			if (proximo != null)
+				proximo.setAnterior(anterior);
+			else
+				this.ultimo = anterior;
+		}
 	}
 }

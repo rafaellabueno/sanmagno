@@ -4,18 +4,21 @@ import java.text.DateFormat;
 
 public class Atendimento {
 	//atributos da classe
-	private int senha;
+	private int senha, prioridade;
 	private Paciente pac;
-	private String dataC, dataS, horaS;
+	private long dataC, dataA;
+	private String dataS, horaS;
 	
 	//construtor
-	public Atendimento(Paciente pac, String dataC, int senha) {
+	public Atendimento(Paciente pac, long dataC, int senha) {
 		super();
 		this.senha = senha;
 		this.pac = pac;
 		this.dataC = dataC;
+		this.dataA = 0;
 		this.dataS = null;
 		this.horaS = null;
+		this.prioridade = 0;
 	}
 
 	//getters e setters dos atributos
@@ -35,11 +38,11 @@ public class Atendimento {
 		this.pac = pac;
 	}
 
-	public String getDataC() {
+	public long getDataC() {
 		return dataC;
 	}
 
-	public void setDataC(String dataC) {
+	public void setDataC(long dataC) {
 		this.dataC = dataC;
 	}
 
@@ -58,5 +61,20 @@ public class Atendimento {
 	public void setHoraS(String horaS) {
 		this.horaS = horaS;
 	}
-	
+
+	public long getDataA() {
+		return dataA;
+	}
+
+	public void setDataA(long dataA) {
+		this.dataA = dataA;
+	}
+
+	public int getPrioridade() {
+		return prioridade;
+	}
+
+	public void setPrioridade(int prioridade) {
+		this.prioridade = prioridade;
+	}
 }

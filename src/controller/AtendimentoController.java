@@ -3,6 +3,11 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Vector;
 
 import dao.AtendimentoDAO;
@@ -12,7 +17,7 @@ import dao.TempoEsperaDAO;
 import model.Atendimento;
 import model.FilaAtendimento;
 import model.FilaPrioridade;
-import model.ListaAtendimentosEncerrados;
+import model.ListaAtendimentos;
 import model.ListaPaciente;
 import model.No;
 import model.NoAtendimento;
@@ -27,6 +32,11 @@ public class AtendimentoController implements ActionListener {
 	private Paciente pac;
 	private Paciente pLista;
 	private PacienteController pCon;
+	
+	private AtendimentoDAO atendDao; 
+	private TempoEsperaDAO teDAO; 
+	TempoAtendPriDAO tapDAO; 
+	TempoAtendGeralDAO tagDAO; 
 
 	private Atendimento proxAtendimento;
 	private FilaPrioridade filaP1;
@@ -34,8 +44,9 @@ public class AtendimentoController implements ActionListener {
 	private FilaPrioridade filaP3;
 	private FilaPrioridade filaP4;
 	private FilaPrioridade filaP5;
-	private FilaAtendimento filaAtend;
-	private ListaAtendimentosEncerrados listaAtenEnc;
+	
+	private ListaAtendimentos listaAtenEnc;
+	private ListaAtendimentos listaAtenConsulta;
 
 	public AtendimentoController(JanelaPrincipal jan, Paciente pac) {
 		super();
@@ -56,6 +67,7 @@ public class AtendimentoController implements ActionListener {
 		this.jan.getMntmProxAtend().addActionListener(this);
 		this.jan.getMntmFilaPrioridade().addActionListener(this);
 		this.jan.getMntmListEnce().addActionListener(this);
+		this.jan.getMntmEnceAtend().addActionListener(this);
 
 		// Vai para a tela de triagem a partir do painel de senhas
 		this.jan.getTsenha().getBtnTriagem().addActionListener(this);
@@ -69,9 +81,6 @@ public class AtendimentoController implements ActionListener {
 		this.jan.getTtriagem().getBtnVoltar().addActionListener(this);
 		this.jan.getTtriagem().getBtnLimpar().addActionListener(this);
 
-		// Botão para ir para a tela de atendimentos encerrados
-		this.jan.getTproxpac().getBtnEncerrarAtendimento().addActionListener(this);
-
 		// Ações relacionados a tela de atendimentos encerrados
 		this.jan.getTatendenc().getBtnLimpar().addActionListener(this);
 		this.jan.getTatendenc().getBtnVoltar().addActionListener(this);
@@ -80,7 +89,6 @@ public class AtendimentoController implements ActionListener {
 
 		// Ações relacionadas aos JMenuItem de gerar relatório
 		this.jan.getMntmGerarRelatorioAtend().addActionListener(this);
-		filaAtend = new FilaAtendimento(); 
 		this.jan.getMntmGerarRelatorioTME().addActionListener(this);
 		this.jan.getMntmGerarRelatorioTMAG().addActionListener(this);
 		this.jan.getMntmGerarRelatorioTMAP().addActionListener(this);
@@ -91,9 +99,16 @@ public class AtendimentoController implements ActionListener {
 		filaP3 = new FilaPrioridade();
 		filaP4 = new FilaPrioridade();
 		filaP5 = new FilaPrioridade();
+		
+		//instanciando os dao
+		atendDao = new AtendimentoDAO();
+		teDAO = new TempoEsperaDAO();
+		tapDAO = new TempoAtendPriDAO();
+		tagDAO = new TempoAtendGeralDAO();
 
 		pCon = new PacienteController(jan, pac);
-		listaAtenEnc = new ListaAtendimentosEncerrados();
+		listaAtenEnc = new ListaAtendimentos();
+		listaAtenConsulta = new ListaAtendimentos();
 	}
 
 	@Override
@@ -314,63 +329,8 @@ public class AtendimentoController implements ActionListener {
 			}
 		}
 
-		// Tela para próximo atendimento a ser chamado de acordo com as prioridades
-		if (arg0.getActionCommand().equals("menuProx")) {
-			this.jan.setContentPane(this.jan.getTproxpac());
-			this.jan.revalidate();
-			this.jan.repaint();
-			this.jan.getTproxpac().getLblNomeProx().setText("");
-			this.jan.getTproxpac().getLblPrioridadeProx().setText("");
-			this.jan.getTproxpac().getLblAviso().setText("");
-			if (filaP1.estaVazia() == false) {
-				this.jan.getTproxpac().getLblNomeProx().setText(filaP1.topo().getAtendimento().getPac().getNome());
-				this.jan.getTproxpac().getLblPrioridadeProx().setText(String.valueOf(1));
-				NoFila ateEnc = filaP1.desempilhar();
-				listaAtenEnc.adicionar(ateEnc.getAtendimento());
-				this.jan.getTproxpac().botaoEAten();
-			} else {
-				if (filaP2.estaVazia() == false) {
-					this.jan.getTproxpac().getLblNomeProx().setText(filaP2.topo().getAtendimento().getPac().getNome());
-					this.jan.getTproxpac().getLblPrioridadeProx().setText(String.valueOf(2));
-					NoFila ateEnc = filaP2.desempilhar();
-					listaAtenEnc.adicionar(ateEnc.getAtendimento());
-					this.jan.getTproxpac().botaoEAten();
-				} else {
-					if (filaP3.estaVazia() == false) {
-						this.jan.getTproxpac().getLblNomeProx()
-								.setText(filaP3.topo().getAtendimento().getPac().getNome());
-						this.jan.getTproxpac().getLblPrioridadeProx().setText(String.valueOf(3));
-						NoFila ateEnc = filaP3.desempilhar();
-						listaAtenEnc.adicionar(ateEnc.getAtendimento());
-						this.jan.getTproxpac().botaoEAten();
-					} else {
-						if (filaP4.estaVazia() == false) {
-							this.jan.getTproxpac().getLblNomeProx()
-									.setText(filaP4.topo().getAtendimento().getPac().getNome());
-							this.jan.getTproxpac().getLblPrioridadeProx().setText(String.valueOf(4));
-							NoFila ateEnc = filaP4.desempilhar();
-							listaAtenEnc.adicionar(ateEnc.getAtendimento());
-							this.jan.getTproxpac().botaoEAten();
-						} else {
-							if (filaP5.estaVazia() == false) {
-								this.jan.getTproxpac().getLblNomeProx()
-										.setText(filaP5.topo().getAtendimento().getPac().getNome());
-								this.jan.getTproxpac().getLblPrioridadeProx().setText(String.valueOf(5));
-								NoFila ateEnc = filaP5.desempilhar();
-								listaAtenEnc.adicionar(ateEnc.getAtendimento());
-								this.jan.getTproxpac().botaoEAten();
-							} else {
-								this.jan.getTproxpac().getLblAviso().setText("Não há pacientes para chamada");
-								this.jan.getTproxpac().botaoEAtenDesabilitar();
-							}
-						}
-					}
-				}
-			}
-		}
-
-		// Tela de atendimentos encerrados
-		if (arg0.getActionCommand().equals("Encerrar Atendimento")) {
+		//Tela para encerrar atendimento
+		if (arg0.getActionCommand().equals("menuEnceAtend")) {
 			this.jan.setContentPane(this.jan.getTatendenc());
 			this.jan.revalidate();
 			this.jan.repaint();
@@ -379,6 +339,57 @@ public class AtendimentoController implements ActionListener {
 			this.jan.getTatendenc().getTextHorasS().setText("");
 			this.jan.getTatendenc().getLblNome().setText("");
 			this.jan.getTatendenc().getLblAviso().setText("");
+		}
+		
+		// Tela para próximo atendimento a ser chamado de acordo com as prioridades
+		if (arg0.getActionCommand().equals("menuProx")) {
+			this.jan.setContentPane(this.jan.getTproxpac());
+			this.jan.revalidate();
+			this.jan.repaint();
+			this.jan.getTproxpac().getLblNomeProx().setText("");
+			this.jan.getTproxpac().getLblPrioridadeProx().setText("");
+			this.jan.getTproxpac().getLblAviso().setText("");
+			NoFila ateEnc = null;
+			if (filaP1.estaVazia() == false) {
+				this.jan.getTproxpac().getLblNomeProx().setText(filaP1.topo().getAtendimento().getPac().getNome());
+				this.jan.getTproxpac().getLblPrioridadeProx().setText(String.valueOf(1));
+				ateEnc = filaP1.desempilhar();
+			} else {
+				if (filaP2.estaVazia() == false) {
+					this.jan.getTproxpac().getLblNomeProx().setText(filaP2.topo().getAtendimento().getPac().getNome());
+					this.jan.getTproxpac().getLblPrioridadeProx().setText(String.valueOf(2));
+					ateEnc = filaP2.desempilhar();
+				} else {
+					if (filaP3.estaVazia() == false) {
+						this.jan.getTproxpac().getLblNomeProx()
+								.setText(filaP3.topo().getAtendimento().getPac().getNome());
+						this.jan.getTproxpac().getLblPrioridadeProx().setText(String.valueOf(3));
+						ateEnc = filaP3.desempilhar();
+					} else {
+						if (filaP4.estaVazia() == false) {
+							this.jan.getTproxpac().getLblNomeProx()
+									.setText(filaP4.topo().getAtendimento().getPac().getNome());
+							this.jan.getTproxpac().getLblPrioridadeProx().setText(String.valueOf(4));
+							ateEnc = filaP4.desempilhar();
+						} else {
+							if (filaP5.estaVazia() == false) {
+								this.jan.getTproxpac().getLblNomeProx()
+										.setText(filaP5.topo().getAtendimento().getPac().getNome());
+								this.jan.getTproxpac().getLblPrioridadeProx().setText(String.valueOf(5));
+								ateEnc = filaP5.desempilhar();
+							} else {
+								this.jan.getTproxpac().getLblAviso().setText("Não há pacientes para chamada");
+							}
+						}
+					}
+				}
+			}
+			if(ateEnc != null) {
+				Calendar cal = Calendar.getInstance();
+				long d = cal.getTimeInMillis();
+				ateEnc.getAtendimento().setDataA(d);
+				listaAtenConsulta.adicionar(ateEnc.getAtendimento());
+			}
 		}
 
 		// Tela da lista de atendimentos encerrados
@@ -400,7 +411,7 @@ public class AtendimentoController implements ActionListener {
 		if (arg0.getActionCommand().equals("Pesquisar CPF")) {
 			try {
 				String cpf = (this.jan.getTatendenc().getTextCpf().getText());
-				pLista = listaAtenEnc.buscar(cpf).getAtendimento().getPac();
+				pLista = listaAtenConsulta.buscar(cpf).getAtendimento().getPac();
 				this.jan.getTatendenc().getLblNome().setText(pLista.getNome());
 				this.jan.getTatendenc().tornarBotaoVisivel();
 			} catch (Exception e) {
@@ -413,10 +424,11 @@ public class AtendimentoController implements ActionListener {
 		if (arg0.getActionCommand().equals("Atualizar")) {
 			try {
 				String cpf = (this.jan.getTatendenc().getTextCpf().getText());
-				Atendimento atAtual = listaAtenEnc.buscar(cpf).getAtendimento();
+				Atendimento atAtual = listaAtenConsulta.buscar(cpf).getAtendimento();
 				atAtual.setDataS(this.jan.getTatendenc().getTextDataS().getText());
 				atAtual.setHoraS(this.jan.getTatendenc().getTextHorasS().getText());
-
+				listaAtenConsulta.removerInicio(atAtual);
+				listaAtenEnc.adicionar(atAtual);
 				// 18:21:12
 				String hora = this.jan.getTatendenc().getTextHorasS().getText();
 
@@ -425,33 +437,119 @@ public class AtendimentoController implements ActionListener {
 			}
 		}
 		//gera relatório
-		if(arg0.getActionCommand().equals("menuRelatorioAtend"))
+		if(arg0.getActionCommand().equals("menuAtend"))
 		{
-			AtendimentoDAO atendDao = new AtendimentoDAO(); 
-			atendDao.relatorioAtendimento(this.filaAtend);
+			atendDao.relatorioAtendimento(this.listaAtenEnc);
 		}
 		
 		//gera relatório
-		//if(arg0.getActionCommand().equals("menuRelatorioTME"))
-		//{
-			//TempoEsperaDAO teDAO = new TempoEsperaDAO(); 
-			//teDAO.tempoEspera();
-		//}
-		
-		//gera relatório
-		//if(arg0.getActionCommand().equals("menuRelatorioTMAP"))
-		//{
-			//TempoAtendPriDAO tapDAO = new TempoAtendPriDAO(); 
-			//tapDAO.tempoAtendPri(); 
+		if(arg0.getActionCommand().equals("menuRelatorioTME"))
+		{
+			long total = 0;
+			int cont = 0;
+			//as duas listas de atendimento
+			for (NoAtendimento aux = listaAtenEnc.primeiro(); aux != null; aux = aux.getProximo()) {
+				long espera = aux.getAtendimento().getDataA() - aux.getAtendimento().getDataC();
+				total = total + espera;
+				cont++;
+			}
 			
-		//}
+			for (NoAtendimento aux = listaAtenConsulta.primeiro(); aux != null; aux = aux.getProximo()) {
+				long espera = aux.getAtendimento().getDataA() - aux.getAtendimento().getDataC();
+				total = total + espera;
+				cont++;
+			}
+			total = total /cont;
+			String tempo = String.format( "%03d:%02d:%02d", total / 3600000, ( total / 60000 ) % 60, ( total / 1000 ) % 60);
+			teDAO.tempoEspera(tempo);
+		}
 		
 		//gera relatório
-		//if(arg0.getActionCommand().equals("menuRelatorioTMAG"))
-		//{
-			//TempoAtendGeralDAO tagDAO = new TempoAtendGeralDAO(); 
-			//tagDAO.tempoAtendGeral();
-		//}
+		if(arg0.getActionCommand().equals("menuRelatorioTMAP"))
+		{
+			long total1 = 0, total2 = 0, total3 = 0, total4 = 0, total5 = 0;
+			int cont1 = 0, cont2 = 0, cont3 = 0, cont4 = 0, cont5 = 0;
+			Date date1 = null;
+			for (NoAtendimento aux = listaAtenEnc.primeiro(); aux != null; aux = aux.getProximo()) {
+				String data = aux.getAtendimento().getHoraS();
+				 DateFormat tes = new SimpleDateFormat("HH:mm:ss");  
+				 try {
+					date1= tes.parse(data);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				long tS = date1.getTime();
+				long espera = tS - aux.getAtendimento().getDataC();
+				if(aux.getAtendimento().getPrioridade() == 1) {
+					total1 = total1 + espera;
+					cont1++;
+				}
+				if(aux.getAtendimento().getPrioridade() == 2) {
+					total2 = total2 + espera;
+					cont2++;
+				}
+				if(aux.getAtendimento().getPrioridade() == 3) {
+					total3 = total3 + espera;
+					cont3++;
+				}
+				if(aux.getAtendimento().getPrioridade() == 4) {
+					total4 = total4 + espera;
+					cont4++;
+				}
+				if(aux.getAtendimento().getPrioridade() == 5) {
+					total5 = total5 + espera;
+					cont5++;
+				}
+			}
+			if(cont1 != 0) {
+				total1 = total1 / cont1;
+			}
+			if(cont2 != 0) {
+				total2 = total2 / cont2;
+			}
+			if(cont3 != 0) {
+				total3 = total3 / cont3;
+			}
+			if(cont4 != 0) {
+				total4 = total4 / cont4;
+			}
+			if(cont5 != 0) {
+				total5 = total5 / cont5;
+			}
+			String tempo1 = String.format( "%03d:%02d:%02d", total1 / 3600000, ( total1 / 60000 ) % 60, ( total1 / 1000 ) % 60);
+			String tempo2 = String.format( "%03d:%02d:%02d", total2 / 3600000, ( total2 / 60000 ) % 60, ( total2 / 1000 ) % 60);
+			String tempo3 = String.format( "%03d:%02d:%02d", total3 / 3600000, ( total3 / 60000 ) % 60, ( total3 / 1000 ) % 60);
+			String tempo4 = String.format( "%03d:%02d:%02d", total4 / 3600000, ( total4 / 60000 ) % 60, ( total4 / 1000 ) % 60);
+			String tempo5 = String.format( "%03d:%02d:%02d", total5 / 3600000, ( total5 / 60000 ) % 60, ( total5 / 1000 ) % 60);
+			tapDAO.tempoAtendPri(tempo1, tempo2, tempo3, tempo4, tempo5);
+			
+		}
+		
+		//gera relatório
+		if(arg0.getActionCommand().equals("menuRelatorioTMAG"))
+		{
+			long total = 0;
+			int cont = 0;
+			Date date1 = null;
+			for (NoAtendimento aux = listaAtenEnc.primeiro(); aux != null; aux = aux.getProximo()) {
+				String data = aux.getAtendimento().getHoraS();
+				 DateFormat tes = new SimpleDateFormat("HH:mm:ss");  
+				 try {
+					date1= tes.parse(data);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				long tS = date1.getTime();
+				long espera = tS - aux.getAtendimento().getDataC();
+				total = total + espera;
+				cont++;
+			}
+			total = total / cont;
+			String tempo = String.format( "%03d:%02d:%02d", total / 3600000, ( total / 60000 ) % 60, ( total / 1000 ) % 60);
+			tagDAO.tempoAtendGeral(tempo);
+		}
 		
 	}
 

@@ -17,7 +17,6 @@ public class TelaProxPac extends JPanel {
 	private JLabel lblNomeProx;
 	private JLabel lblPrioridadeProx;
 	private JLabel lblAviso;
-	private JButton btnEncerrarAtendimento;
 	private JLabel label;
 
 	/**
@@ -73,10 +72,6 @@ public class TelaProxPac extends JPanel {
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(new Color(102, 205, 170));
 		add(panel_3, "cell 0 4 6 1,grow");
-
-		btnEncerrarAtendimento = new JButton("Encerrar Atendimento");
-		btnEncerrarAtendimento.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_3.add(btnEncerrarAtendimento);
 		
 		lblAviso = new JLabel("");
 	    lblAviso.setHorizontalAlignment(SwingConstants.CENTER);
@@ -101,16 +96,7 @@ public class TelaProxPac extends JPanel {
 
 	public void setLblPrioridadeProx(JLabel lblPrioridadeProx) {
 		this.lblPrioridadeProx = lblPrioridadeProx;
-	}
-
-	public JButton getBtnEncerrarAtendimento() {
-		return btnEncerrarAtendimento;
-	}
-
-	public void setBtnEncerrarAtendimento(JButton btnEncerrarAtendimento) {
-		this.btnEncerrarAtendimento = btnEncerrarAtendimento;
-	}
-	
+	}	
 	public JLabel getLblAviso() {
 		return lblAviso;
 	}
@@ -118,15 +104,4 @@ public class TelaProxPac extends JPanel {
 	public void setLblAviso(JLabel lblAviso) {
 		this.lblAviso = lblAviso;
 	}
-
-	//botao de encerrar atendimento só é liberado se há pacientes
-	public void botaoEAten() {
-		btnEncerrarAtendimento.setEnabled(true);
-	}
-
-	//botao de encerrar atendimento é ocultado
-	public void botaoEAtenDesabilitar() {
-		btnEncerrarAtendimento.setEnabled(false);
-	}
-
 }

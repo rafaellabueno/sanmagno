@@ -41,6 +41,7 @@ public class JanelaPrincipal extends JFrame {
 	private JMenuItem mntmListEnce;
 	private JMenuItem mntmFilaPrioridade;
 	private JMenuItem mntmProxAtend;
+	private JMenuItem mntmEnceAtend;
 	private JMenuItem mntmGerarRelatorioPac;
 	private JMenuItem mntmGerarRelatorioAtend;
 	private JMenuItem mntmGerarRelatorioTME;
@@ -82,6 +83,10 @@ public class JanelaPrincipal extends JFrame {
 		mntmListEnce = new JMenuItem("Lista de Atendimentos Encerrados");
 		mntmListEnce.setActionCommand("menuListEnce");
 		mnAtendimento.add(mntmListEnce);
+		
+		mntmEnceAtend = new JMenuItem("Encerrar Atendimento");
+		mntmEnceAtend.setActionCommand("menuEnceAtend");
+		mnAtendimento.add(mntmEnceAtend);
 
 		JMenu mnPrioridade = new JMenu("Prioridade");
 		menuBar.add(mnPrioridade);
@@ -101,20 +106,20 @@ public class JanelaPrincipal extends JFrame {
 		mntmGerarRelatorioPac.setActionCommand("menuRelatorioPac");
 		mnRelatorios.add(mntmGerarRelatorioPac);
 
-		mntmGerarRelatorioAtend = new JMenuItem("Gerar Relatórios de Atendimento");
-		mntmGerarRelatorioAtend.setActionCommand("menuRelatorioAtend");
+		mntmGerarRelatorioAtend = new JMenuItem("Gerar Relatórios de Atendimentos Encerrados");
+		mntmGerarRelatorioAtend.setActionCommand("menuAtend");
 		mnRelatorios.add(mntmGerarRelatorioAtend);
 
 		mntmGerarRelatorioTME = new JMenuItem("Gerar Relatórios de Tempo Médio de Espera ");
-		mntmGerarRelatorioAtend.setActionCommand("menuRelatorioTME");
+		mntmGerarRelatorioTME.setActionCommand("menuRelatorioTME");
 		mnRelatorios.add(mntmGerarRelatorioTME);
 
 		mntmGerarRelatorioTMAP = new JMenuItem("Gerar Relatórios de Tempo Médio de Atendimento (por prioridade)");
-		mntmGerarRelatorioAtend.setActionCommand("menuRelatorioTMAP");
+		mntmGerarRelatorioTMAP.setActionCommand("menuRelatorioTMAP");
 		mnRelatorios.add(mntmGerarRelatorioTMAP);
 
 		mntmGerarRelatorioTMAG = new JMenuItem("Gerar Relatórios de Tempo Médio de Atendimento (geral)");
-		mntmGerarRelatorioAtend.setActionCommand("menuRelatorioTMAG");
+		mntmGerarRelatorioTMAG.setActionCommand("menuRelatorioTMAG");
 		mnRelatorios.add(mntmGerarRelatorioTMAG);
 
 		contentPane = new JPanel();
@@ -322,4 +327,11 @@ public class JanelaPrincipal extends JFrame {
 		this.mntmGerarRelatorioTMAG = mntmGerarRelatorioTMAG;
 	}
 
+	public JMenuItem getMntmEnceAtend() {
+		return mntmEnceAtend;
+	}
+
+	public void setMntmEnceAtend(JMenuItem mntmEnceAtend) {
+		this.mntmEnceAtend = mntmEnceAtend;
+	}
 }
