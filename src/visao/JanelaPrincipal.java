@@ -33,6 +33,7 @@ public class JanelaPrincipal extends JFrame {
 	private TelaTriagem tTriagem;
 	private TelaProxPac tProxPac;
 	private TelaListaAtendEncer tListEnce;
+	private TelaConfirmaAtendEnc tConfirmaAtendEnc;
 	private TelaAtendEncer tAtendEnc;
 	private JMenuItem menuCadastro;
 	private JMenuItem menuConsulta;
@@ -83,7 +84,7 @@ public class JanelaPrincipal extends JFrame {
 		mntmListEnce = new JMenuItem("Lista de Atendimentos Encerrados");
 		mntmListEnce.setActionCommand("menuListEnce");
 		mnAtendimento.add(mntmListEnce);
-		
+
 		mntmEnceAtend = new JMenuItem("Encerrar Atendimento");
 		mntmEnceAtend.setActionCommand("menuEnceAtend");
 		mnAtendimento.add(mntmEnceAtend);
@@ -152,6 +153,7 @@ public class JanelaPrincipal extends JFrame {
 		tProxPac = new TelaProxPac();
 		tAtendEnc = new TelaAtendEncer();
 		tListEnce = new TelaListaAtendEncer();
+		tConfirmaAtendEnc = new TelaConfirmaAtendEnc(); 
 	}
 
 	// getters e setters das telas e componentes
@@ -334,4 +336,13 @@ public class JanelaPrincipal extends JFrame {
 	public void setMntmEnceAtend(JMenuItem mntmEnceAtend) {
 		this.mntmEnceAtend = mntmEnceAtend;
 	}
+
+	public TelaConfirmaAtendEnc gettConfirmaAtendEnc() {
+		return tConfirmaAtendEnc;
+	}
+
+	public void settConfirmaAtendEnc(TelaConfirmaAtendEnc tConfirmaAtendEnc) {
+		this.tConfirmaAtendEnc = tConfirmaAtendEnc;
+	}
+
 }

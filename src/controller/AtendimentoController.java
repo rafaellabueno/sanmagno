@@ -65,7 +65,8 @@ public class AtendimentoController implements ActionListener {
 		// Botões de voltar para a tela principal e de limpar dados na tela de consulta
 		this.jan.getTcon().getBtnVoltar().addActionListener(this);
 		this.jan.getTcon().getBtnLimpar().addActionListener(this);
-
+		this.jan.gettConfirmaAtendEnc().getBtnMenu().addActionListener(this);
+		
 		// Menu item para mudança de telas
 		this.jan.getMntmPainelDeSenhas().addActionListener(this);
 		this.jan.getMntmProxAtend().addActionListener(this);
@@ -461,6 +462,11 @@ public class AtendimentoController implements ActionListener {
 
 		// Atualiza os dados do atendimento
 		if (arg0.getActionCommand().equals("Atualizar")) {
+			
+			this.jan.setContentPane(this.jan.gettConfirmaAtendEnc());
+			this.jan.revalidate();
+			this.jan.repaint();
+					
 			try {
 				String cpf = (this.jan.getTatendenc().getTextCpf().getText());
 				Atendimento atAtual = listaAtenConsulta.buscar(cpf).getAtendimento();
