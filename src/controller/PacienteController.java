@@ -51,7 +51,7 @@ public class PacienteController implements ActionListener{
 				} else {
 					String cPFAux = (this.jan.getTcad().getTextCPF().getText());
 					if(listaPac.buscar(cPFAux) == null) {
-						int dataAux = Integer.parseInt(this.jan.getTcad().getTextData().getText());
+						String dataAux = this.jan.getTcad().getTextData().getText();
 						Paciente pac = new Paciente(nomeAux, cPFAux, dataAux);
 						listaPac.adicionar(pac);
 						this.jan.setContentPane(this.jan.getTconfirma());

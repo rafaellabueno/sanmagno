@@ -4,10 +4,10 @@ public class Paciente {
 	//atributos da classe
 	private String nome;
 	private String cpf;
-	private int datanasc;
+	private String datanasc;
 	
 	//construtor da classe
-	public Paciente(String nome, String cpf, int datanasc) {
+	public Paciente(String nome, String cpf, String datanasc) {
 		super();
 		this.nome = nome;
 		this.cpf = cpf;
@@ -36,11 +36,11 @@ public class Paciente {
 		this.cpf = cpf;
 	}
 	
-	public int getDatanasc() {
+	public String getDatanasc() {
 		return datanasc;
 	}
 	
-	public void setDatanasc(int datanasc) {
+	public void setDatanasc(String datanasc) {
 		this.datanasc = datanasc;
 	}	
 }

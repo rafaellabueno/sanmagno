@@ -30,7 +30,7 @@ public class TelaFilasDePrioridades extends JPanel {
 	 */
 	public TelaFilasDePrioridades() {
 		setBackground(new Color(255, 255, 255));
-		setLayout(new MigLayout("", "[grow]", "[grow]"));
+		setLayout(new MigLayout("", "[grow]", "[grow][][][grow][]"));
 				
 				JPanel panel = new JPanel();
 				panel.setBackground(new Color(102, 205, 170));
@@ -64,10 +64,13 @@ public class TelaFilasDePrioridades extends JPanel {
 				comboPrioridade.addItem("Prioridade 3");
 				comboPrioridade.addItem("Prioridade 4");
 				comboPrioridade.addItem("Prioridade 5");
-
-		JLabel lblPacientes = new JLabel("Pacientes");
-		lblPacientes.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		add(lblPacientes, "cell 0 5 4 1,alignx center");
+		
+				JLabel lblPacientes = new JLabel("Pacientes");
+				lblPacientes.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				add(lblPacientes, "cell 0 2,alignx center");
+		
+		JPanel panel_3 = new JPanel();
+		add(panel_3, "cell 0 3,alignx center,aligny center");
 		
 		listModel = new DefaultListModel();
 		list = new JList(listModel);
@@ -78,15 +81,16 @@ public class TelaFilasDePrioridades extends JPanel {
 		scrollPane.setViewportView(list);
 		list.setLayoutOrientation(JList.VERTICAL);
 		
-		add(scrollPane, "flowx,cell 0 6 4 2,alignx center,aligny center");
+		panel_3.add(scrollPane, "flowx,cell 0 6 4 2,alignx center,aligny center");
+		
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(102, 205, 170));
-		add(panel_1, "cell 0 8 4 1,grow");
+		add(panel_1, "cell 0 9 4 1,grow");
 		
 				btnPesquisarPrioridade = new JButton("Pesquisar Prioridade");
 				btnPesquisarPrioridade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-				add(btnPesquisarPrioridade, "cell 0 1 4 1,growx");
+				add(btnPesquisarPrioridade, "cell 0 1,growx");
 	}
 	
 	//getters e setters dos componentes da tela
