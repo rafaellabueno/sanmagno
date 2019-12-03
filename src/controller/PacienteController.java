@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 
 import dao.PacienteDAO;
 import model.ListaPaciente;
@@ -45,8 +46,8 @@ public class PacienteController implements ActionListener{
 		if (e.getActionCommand().equals("Cadastrar")) {
 			try {
 				String nomeAux = this.jan.getTcad().getTextNome().getText();
-				if (nomeAux.equals("") || this.jan.getTcad().getTextCPF().getText().equals("")
-						|| this.jan.getTcad().getTextData().getText().equals("")) {
+				if (nomeAux.equals("") || this.jan.getTcad().getTextCPF().getText().equals("   .   .   -  ")
+						|| this.jan.getTcad().getTextData().getText().equals("  /  /    ")) {
 					this.jan.getTcad().getLblAviso().setText("Todos os campos devem ser preenchidos");
 				} else {
 					String cPFAux = (this.jan.getTcad().getTextCPF().getText());

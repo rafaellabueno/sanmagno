@@ -4,13 +4,17 @@ import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.text.ParseException;
+
 import javax.swing.JTextField;
+import javax.swing.JFormattedTextField;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
+import javax.swing.text.MaskFormatter;
 import javax.swing.SwingConstants;
 import javax.swing.Icon;
 
@@ -34,8 +38,9 @@ public class TelaCadastro extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @throws ParseException 
 	 */
-	public TelaCadastro() {
+	public TelaCadastro(){
 		setBackground(new Color(255, 255, 255));
 		setLayout(new MigLayout("", "[grow][][][][][][][][][]", "[grow][][][grow][][grow][][]"));
 		
@@ -76,7 +81,12 @@ public class TelaCadastro extends JPanel {
 		panel_1.add(lblCPF, "cell 0 2");
 		lblCPF.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
-		textCPF = new JTextField();
+		try {
+			textCPF = new JFormattedTextField(new MaskFormatter("###.###.###-##"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		panel_1.add(textCPF, "cell 0 3,growx");
 		textCPF.setColumns(10);
 		
@@ -84,7 +94,12 @@ public class TelaCadastro extends JPanel {
 		panel_1.add(lblDataNas, "cell 0 4");
 		lblDataNas.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
-		textData = new JTextField();
+		try {
+			textData = new JFormattedTextField(new MaskFormatter("##/##/####"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		panel_1.add(textData, "cell 0 5,growx");
 		textData.setColumns(10);
 		

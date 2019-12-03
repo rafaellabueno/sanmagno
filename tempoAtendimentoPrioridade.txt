@@ -1,5 +1,5 @@
 Tempo Médio Atendimento por Prioridade:Prioridade 1: 000:00:00
 Prioridade 2: 000:00:00
-Prioridade 3: 000:28:05
+Prioridade 3: 000:10:03
 Prioridade 4: 000:00:00
 Prioridade 5: 000:00:00

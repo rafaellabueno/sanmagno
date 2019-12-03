@@ -8,6 +8,9 @@ import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+import javax.swing.text.MaskFormatter;
+import java.text.ParseException;
 
 public class TelaConsulta extends JPanel {
 
@@ -61,7 +64,12 @@ public class TelaConsulta extends JPanel {
 		panel_1.add(lblDigiteOCpf, "flowx,cell 0 0");
 		lblDigiteOCpf.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		textCPF = new JTextField();
+		try {
+			textCPF = new JFormattedTextField(new MaskFormatter("###.###.###-##"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		panel_1.add(textCPF, "cell 0 0");
 		textCPF.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textCPF.setColumns(10);

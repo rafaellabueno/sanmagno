@@ -452,6 +452,7 @@ public class AtendimentoController implements ActionListener {
 			try {
 				String cpf = (this.jan.getTatendenc().getTextCpf().getText());
 				pLista = listaAtenConsulta.buscar(cpf).getAtendimento().getPac();
+				System.out.println(pLista);
 				this.jan.getTatendenc().getLblNome().setText(pLista.getNome());
 				this.jan.getTatendenc().tornarBotaoVisivel();
 			} catch (Exception e) {
@@ -461,19 +462,23 @@ public class AtendimentoController implements ActionListener {
 		}
 
 		// Atualiza os dados do atendimento
-		if (arg0.getActionCommand().equals("Atualizar")) {
-			
-			this.jan.setContentPane(this.jan.gettConfirmaAtendEnc());
-			this.jan.revalidate();
-			this.jan.repaint();
-					
+		if (arg0.getActionCommand().equals("Atualizar")) {		
 			try {
-				String cpf = (this.jan.getTatendenc().getTextCpf().getText());
-				Atendimento atAtual = listaAtenConsulta.buscar(cpf).getAtendimento();
-				atAtual.setDataS(this.jan.getTatendenc().getTextDataS().getText());
-				atAtual.setHoraS(this.jan.getTatendenc().getTextHorasS().getText());
-				listaAtenConsulta.removerInicio(atAtual);
-				listaAtenEnc.adicionar(atAtual);
+				if (this.jan.getTatendenc().getTextDataS().getText().equals("  /  /    ")
+						|| this.jan.getTatendenc().getTextHorasS().getText().equals("  :  :  ")) {
+					this.jan.getTcad().getLblAviso().setText("Todos os campos devem ser preenchidos");
+				}
+				else {
+					String cpf = (this.jan.getTatendenc().getTextCpf().getText());
+					Atendimento atAtual = listaAtenConsulta.buscar(cpf).getAtendimento();
+					atAtual.setDataS(this.jan.getTatendenc().getTextDataS().getText());
+					atAtual.setHoraS(this.jan.getTatendenc().getTextHorasS().getText());
+					listaAtenConsulta.removerInicio(atAtual);
+					listaAtenEnc.adicionar(atAtual);
+					this.jan.setContentPane(this.jan.gettConfirmaAtendEnc());
+					this.jan.revalidate();
+					this.jan.repaint();
+				}
 
 			} catch (Exception e) {
 				this.jan.getTatendenc().getLblAviso().setText("Campos com valores inadequados");
