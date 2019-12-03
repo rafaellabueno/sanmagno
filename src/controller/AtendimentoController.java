@@ -125,7 +125,7 @@ public class AtendimentoController implements ActionListener {
 			this.jan.getTcad().getTextNome().setText("");
 			this.jan.getTcad().getTextCPF().setText("");
 			this.jan.getTcad().getTextData().setText("");
-			this.jan.getTcad().getLblAviso().setText("");
+			this.jan.getTcad().getLblAviso().setText(" ");
 			this.jan.getTtriagem().getChckbxApneia().setSelected(false);
 			this.jan.getTtriagem().getChckbxConfusoDesorientado().setSelected(false);
 			this.jan.getTtriagem().getChckbxDor().setSelected(false);
@@ -165,7 +165,7 @@ public class AtendimentoController implements ActionListener {
 				this.jan.setContentPane(this.jan.getTsenha());
 				this.jan.revalidate();
 				this.jan.repaint();
-				this.jan.getTsenha().getLblAviso().setText("");
+				this.jan.getTsenha().getLblAviso().setText(" ");
 				this.jan.getTsenha().getLblNomePainel().setText("");
 				this.jan.getTsenha().getLblCpfPainel().setText("");
 				this.jan.getTsenha().getLblSenhaPainel().setText("");
@@ -288,7 +288,7 @@ public class AtendimentoController implements ActionListener {
 				this.jan.setContentPane(this.jan.getTsenha());
 				this.jan.revalidate();
 				this.jan.repaint();
-				this.jan.getTsenha().getLblAviso().setText("");
+				this.jan.getTsenha().getLblAviso().setText(" ");
 				this.jan.getTsenha().getLblNomePainel().setText("");
 				this.jan.getTsenha().getLblCpfPainel().setText("");
 				this.jan.getTsenha().getLblSenhaPainel().setText("");
@@ -323,7 +323,6 @@ public class AtendimentoController implements ActionListener {
 			Vector vector = new Vector();
 			vector.add("Não há pacientes");
 			this.jan.getTfpri().adicionaItem(vector);
-			System.out.println(vector);
 			this.jan.setContentPane(this.jan.getTfpri());
 			this.jan.revalidate();
 			this.jan.repaint();
@@ -378,7 +377,7 @@ public class AtendimentoController implements ActionListener {
 			this.jan.getTatendenc().getTextDataS().setText("");
 			this.jan.getTatendenc().getTextHorasS().setText("");
 			this.jan.getTatendenc().getLblNome().setText("");
-			this.jan.getTatendenc().getLblAviso().setText("");
+			this.jan.getTatendenc().getLblAviso().setText(" ");
 		}
 
 		// Tela para próximo atendimento a ser chamado de acordo com as prioridades
@@ -388,7 +387,7 @@ public class AtendimentoController implements ActionListener {
 			this.jan.repaint();
 			this.jan.getTproxpac().getLblNomeProx().setText("");
 			this.jan.getTproxpac().getLblPrioridadeProx().setText("");
-			this.jan.getTproxpac().getLblAviso().setText("");
+			this.jan.getTproxpac().getLblAviso().setText(" ");
 			NoFila ateEnc = null;
 			if (filaP1.estaVazia() == false) {
 				this.jan.getTproxpac().getLblNomeProx().setText(filaP1.topo().getAtendimento().getPac().getNome());
@@ -452,7 +451,6 @@ public class AtendimentoController implements ActionListener {
 			try {
 				String cpf = (this.jan.getTatendenc().getTextCpf().getText());
 				pLista = listaAtenConsulta.buscar(cpf).getAtendimento().getPac();
-				System.out.println(pLista);
 				this.jan.getTatendenc().getLblNome().setText(pLista.getNome());
 				this.jan.getTatendenc().tornarBotaoVisivel();
 			} catch (Exception e) {
@@ -463,10 +461,10 @@ public class AtendimentoController implements ActionListener {
 
 		// Atualiza os dados do atendimento
 		if (arg0.getActionCommand().equals("Atualizar")) {		
-			try {
+			
 				if (this.jan.getTatendenc().getTextDataS().getText().equals("  /  /    ")
 						|| this.jan.getTatendenc().getTextHorasS().getText().equals("  :  :  ")) {
-					this.jan.getTcad().getLblAviso().setText("Todos os campos devem ser preenchidos");
+					this.jan.getTatendenc().getLblAviso().setText("Todos os campos devem ser preenchidos");
 				}
 				else {
 					String cpf = (this.jan.getTatendenc().getTextCpf().getText());
@@ -478,11 +476,7 @@ public class AtendimentoController implements ActionListener {
 					this.jan.setContentPane(this.jan.gettConfirmaAtendEnc());
 					this.jan.revalidate();
 					this.jan.repaint();
-				}
-
-			} catch (Exception e) {
-				this.jan.getTatendenc().getLblAviso().setText("Campos com valores inadequados");
-			}
+				}			
 		}
 		// gera relatório
 		if (arg0.getActionCommand().equals("menuAtend")) {

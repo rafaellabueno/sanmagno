@@ -38,7 +38,7 @@ public class PacienteController implements ActionListener{
 			this.jan.getTcad().getTextNome().setText("");
 			this.jan.getTcad().getTextCPF().setText("");
 			this.jan.getTcad().getTextData().setText("");
-			this.jan.getTcad().getLblAviso().setText("");
+			this.jan.getTcad().getLblAviso().setText(" ");
 
 		}
 		
@@ -82,7 +82,7 @@ public class PacienteController implements ActionListener{
 			this.jan.revalidate();
 			this.jan.repaint();
 			this.jan.getTcon().getTextCPF().setText("");
-			this.jan.getTcon().getLblPaciente().setText("");
+			this.jan.getTcon().getLblPaciente().setText(" ");
 			this.jan.getTcon().getLblSenha().setText("");		
 		}
 		
